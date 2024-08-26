@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 845988752096976035}
   - component: {fileID: 7816466175931494195}
   - component: {fileID: 3524273780177026222}
-  - component: {fileID: 1324729787315190442}
+  - component: {fileID: -5610033452050056082}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1324729787315190442
+--- !u!114 &-5610033452050056082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
