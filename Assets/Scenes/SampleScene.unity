@@ -155,6 +155,7 @@ MonoBehaviour:
   landBlock: {fileID: 5690408032372946547, guid: 74ac7eac8861edf41a1f2291cd96f914, type: 3}
   pathBlock: {fileID: 3673258221321339792, guid: 0933f02eb462b0749a25ccfacc81e021, type: 3}
   enemySpawn: {fileID: 767021055}
+  playerTower: {fileID: 919132149155446097, guid: b10c5b44939a2db4d827b98d537d68b9, type: 3}
   spawnHeight: 1
   gridRadius: 30
   noiseScale: 10

@@ -7,6 +7,8 @@ public class LandscapeGeneration : MonoBehaviour
     public GameObject landBlock; // GameObject for individual landBlocks
     public GameObject pathBlock; // GameObject for smaller blocks along the path
     public GameObject enemySpawn;
+    private GameObject centreCube;
+    public GameObject playerTower;
     public int spawnHeight = 1;
     public int gridRadius = 30; // Grid radius
     public float noiseScale = 10f; // Scale to adjust frequency of noise. The higher the scale, the smoother the terrain
@@ -19,6 +21,8 @@ public class LandscapeGeneration : MonoBehaviour
     {
         GenerateTerrain();
         GeneratePaths();
+        locateCenterCube();
+        spawnTower();
     }
 
     void GenerateTerrain()
@@ -108,9 +112,28 @@ public class LandscapeGeneration : MonoBehaviour
             Destroy(land[endBlock.x, endBlock.y]);
             land[endBlock.x, endBlock.y] = Instantiate(pathBlock, position, Quaternion.identity);
         }
+
     }
     
+   void locateCenterCube()//Locates the center cube within the array and fetches the gameobject that is declared as center.
+    {
+        Vector2Int center = new Vector2Int(gridRadius / 2, gridRadius / 2);
+        centreCube = land[center.x, center.y];
+        if(centreCube != null )
+        {
+            Renderer cubeRender = centreCube.GetComponent<Renderer>(); //Fetches the unity renderer on the object to allow for visual changes after it is instantiated
+            if(cubeRender != null )
+            {
+                cubeRender.material.color = Color.yellow;
+            }
+        }
+    }
 
-
-   
+    void spawnTower()//Spawns the player tower on the center cube
+    {
+        Vector3 towerSpawn = centreCube.transform.position + new Vector3(0,0.7f,0);
+        playerTower.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+        Instantiate(playerTower, towerSpawn, Quaternion.identity);
+        
+    }
 }
