@@ -118,4 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc52c9ab531f4434ea5a00cf3a804e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highLightColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  flashSpeed: 2

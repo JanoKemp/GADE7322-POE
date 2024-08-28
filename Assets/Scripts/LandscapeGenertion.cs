@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class LandscapeGeneration : MonoBehaviour
@@ -13,7 +14,7 @@ public class LandscapeGeneration : MonoBehaviour
     public int gridRadius = 30; // Grid radius
     public float noiseScale = 10f; // Scale to adjust frequency of noise. The higher the scale, the smoother the terrain
     public float heightScale = 5f; // Scale to adjust the height of blocks (hills of terrain)
-    //public NavMeshSurface terrain;
+    public NavMeshSurface terrain;
 
     private GameObject[,] land; // 2D array for landBlocks
 
@@ -21,6 +22,7 @@ public class LandscapeGeneration : MonoBehaviour
     {
         GenerateTerrain();
         GeneratePaths();
+        BakeNavMesh();
         locateCenterCube();
         spawnTower();
     }
@@ -63,7 +65,17 @@ public class LandscapeGeneration : MonoBehaviour
             // Instantiate the game object at the starting block position
             Vector3 startPosition = land[startBlock.x, startBlock.y].transform.position;
             startPosition.y += spawnHeight;
+            enemySpawn.tag = "EnemySpawn";
             Instantiate(enemySpawn, startPosition, Quaternion.identity);
+        }
+        foreach (var pathBlock in land) //Specify which blocks to bake the navMesh on
+        {
+            if (pathBlock.CompareTag("PathBlock"))
+            {
+                NavMeshModifier modifier = pathBlock.AddComponent<NavMeshModifier>();
+                modifier.overrideArea = true; // Override the area for NavMesh
+                modifier.area = 0; // Default walkable area
+            }
         }
 
 
@@ -128,11 +140,23 @@ public class LandscapeGeneration : MonoBehaviour
             }
         }
     }
+    void BakeNavMesh()
+    {
+        if(terrain != null)
+        {
+            terrain.BuildNavMesh();
+        }
+        else
+        {
+            Debug.Log("There is no terrain");
+        }
+    }
 
     void spawnTower()//Spawns the player tower on the center cube
     {
         Vector3 towerSpawn = centreCube.transform.position + new Vector3(0,0.7f,0);
         playerTower.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+        playerTower.tag = "PlayerTower";
         Instantiate(playerTower, towerSpawn, Quaternion.identity);
         
     }
