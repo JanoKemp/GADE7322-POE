@@ -3,15 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PathBlock
+  - EnemySpawn
+  - PlayerTower
+  - LandBlock
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Walkable
   - Water
   - UI
-  - 
+  - NoneWalkable
   - 
   - 
   - 
