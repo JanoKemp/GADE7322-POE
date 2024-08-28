@@ -7,14 +7,15 @@ TagManager:
   - PathBlock
   - EnemySpawn
   - PlayerTower
+  - LandBlock
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Walkable
   - Water
   - UI
-  - 
+  - NoneWalkable
   - 
   - 
   - 

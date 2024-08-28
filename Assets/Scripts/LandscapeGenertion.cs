@@ -42,6 +42,15 @@ public class LandscapeGeneration : MonoBehaviour
                 land[x, z] = Instantiate(landBlock, position, Quaternion.identity); // Instantiating each block in the 2D array using the position assigned above
             }
         }
+        foreach(var terrainBlock in land)
+        {
+            if(terrainBlock.CompareTag("LandBlock"))
+            {
+                NavMeshModifier modifier = terrainBlock.AddComponent<NavMeshModifier>();
+                modifier.overrideArea = true;
+                modifier.area = 3;
+            }
+        }
     }
 
     void GeneratePaths()
