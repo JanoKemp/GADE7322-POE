@@ -6,22 +6,28 @@ using UnityEngine.AI;
 public class EnemyTypeOne : MonoBehaviour
 {
     private NavMeshAgent agent;
-    private int health;
-    private int maxHealth = 100;
+    private float health;
+    private float maxHealth = 100;
     public GameObject tower;
+    public HealthBar healthBar;
     // Start is called before the first frame update
-    void Start()
+    void Start()    
     {
         health = maxHealth;
         agent = GetComponent<NavMeshAgent>();
         tower = GameObject.FindGameObjectWithTag("PlayerTower");
+        healthBar = GetComponentInChildren<HealthBar>();
+        healthBar.UpdateHealth(health, maxHealth);
+
     }
 
-    private void TakeDamage(int damage)
+    private void TakeDamage(float damage)
     {
+
         if(health > 0 )
         {
             health -= damage;
+            healthBar.UpdateHealth(health, maxHealth);
         }
         if (health <= 0)
         {
