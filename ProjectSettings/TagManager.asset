@@ -8,6 +8,9 @@ TagManager:
   - EnemySpawn
   - PlayerTower
   - LandBlock
+  - defenderProjectile
+  - Enemy
+  - Defender
   layers:
   - Default
   - TransparentFX
