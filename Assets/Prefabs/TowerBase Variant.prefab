@@ -527,7 +527,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ecca1fc21e84364ea910308183ecd5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 2072432696412949081, guid: a456b22cce1c21e4989a08970827ca55, type: 3}
+  target: {fileID: 0}
+  defenderProj: {fileID: 2072432696412949081, guid: a456b22cce1c21e4989a08970827ca55, type: 3}
   rpm: 1.5
   health: 0
   maxHealth: 100

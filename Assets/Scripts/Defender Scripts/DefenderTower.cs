@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class DefenderTower : MonoBehaviour
 {
-    public GameObject projectile;
+    public Transform target;
+    public GameObject defenderProj;
     public float rpm = 1.5f;
     public int health;
     public int maxHealth = 100;
@@ -22,26 +24,46 @@ public class DefenderTower : MonoBehaviour
     void Update()
     {
         fireTimer -= Time.deltaTime;
-
-    }
-    public void Shoot()
-    {
-        if(fireTimer > 0)
-        {
-            return;
-        }
-        else if (fireTimer <= 0)
-        {
-            fireTimer = rpm;
-            Instantiate(projectile);
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if(other.CompareTag("Enemy"))
+        if(target != null && fireTimer <= 0)
         {
             Shoot();
+            fireTimer = rpm;
+        }
+        if(target == null)
+        {
+            FindNewTarget();
+        }
+    }
+    private void Shoot()
+    {
+        GameObject projectile = Instantiate(defenderProj, transform.position, transform.rotation);
+        DefenderProjectile bullet = projectile.GetComponent<DefenderProjectile>();
+        if (bullet != null)
+        {
+            bullet.Seek(target);
+        }
+
+
+
+    }
+    private void FindNewTarget()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        float shortestDistance = Mathf.Infinity;
+        GameObject nearestEnemy = null;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < shortestDistance)
+            {
+                shortestDistance = distanceToEnemy;
+                nearestEnemy = enemy;
+            }
+        }
+        if (nearestEnemy != null)
+        {
+            target = nearestEnemy.transform;
         }
     }
 }

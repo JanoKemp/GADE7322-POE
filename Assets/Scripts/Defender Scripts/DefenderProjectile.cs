@@ -16,10 +16,25 @@ public class DefenderProjectile : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Enemy").transform;
     }
 
-    // Update is called once per frame
-    private void FixedUpdate()
+    public void Seek(Transform _target)
     {
-        Vector3 direction = (target.position - transform.position).normalized;
-        rb.velocity = direction * speed;
+        target = _target;
+    }
+
+    void Update()
+    {
+
+        if (target == null)
+        {
+            Destroy(gameObject);
+        }
+
+
+
+        Vector3 dir = target.position + new Vector3(0f, 5f, 0f) - transform.position;
+        float distanceThisFrame = speed * Time.deltaTime;
+
+        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        transform.LookAt(target);
     }
 }
