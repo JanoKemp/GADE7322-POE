@@ -156,7 +156,7 @@ MonoBehaviour:
   landBlock: {fileID: 5690408032372946547, guid: 74ac7eac8861edf41a1f2291cd96f914, type: 3}
   pathBlock: {fileID: 3673258221321339792, guid: 0933f02eb462b0749a25ccfacc81e021, type: 3}
   enemySpawn: {fileID: 8881923140385099075, guid: c7610661673b8d8438cba3927f3bf813, type: 3}
-  playerTower: {fileID: 919132149155446097, guid: b10c5b44939a2db4d827b98d537d68b9, type: 3}
+  playerTower: {fileID: 5144920521968305184, guid: 0f25de0dcc52ef44fac0829d95ccd291, type: 3}
   spawnHeight: 1
   gridRadius: 30
   noiseScale: 10
@@ -439,7 +439,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 50, z: 0}
+  m_LocalPosition: {x: 14.5, y: 28.2, z: 14.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
