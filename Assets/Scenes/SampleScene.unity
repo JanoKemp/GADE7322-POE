@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 625117252}
   - component: {fileID: 625117254}
   - component: {fileID: 625117255}
+  - component: {fileID: 625117256}
   m_Layer: 0
   m_Name: WorldController
   m_TagString: Untagged
@@ -441,6 +442,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 495741602}
   isPaused: 0
+--- !u!114 &625117256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625117251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a817996db8a53344b7033a8efd16c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gold: 0
 --- !u!1 &679724718
 GameObject:
   m_ObjectHideFlags: 0

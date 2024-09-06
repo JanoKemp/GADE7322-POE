@@ -8,7 +8,7 @@ public class DefenderProjectile : MonoBehaviour
     Rigidbody rb;
     // Start is called before the first frame update
     public int defenderProjectileDmg = 10;
-    private float speed = 2f;
+    private float speed = 10f;
     Transform target;
     void Start()
     {
@@ -31,7 +31,7 @@ public class DefenderProjectile : MonoBehaviour
 
 
 
-        Vector3 dir = target.position + new Vector3(0f, 5f, 0f) - transform.position;
+        Vector3 dir = target.position - transform.position;//+ new Vector3(0f, 5f, 0f) - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);

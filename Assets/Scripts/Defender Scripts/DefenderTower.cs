@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -13,25 +14,38 @@ public class DefenderTower : MonoBehaviour
     public int maxHealth = 100;
 
     private float fireTimer;
+    private bool canShoot = true;
     // Start is called before the first frame update
     void Start()
     {
         fireTimer = 0;
         health = maxHealth;
+        StartCoroutine(FireTimer());
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        fireTimer -= Time.deltaTime;
-        if(target != null && fireTimer <= 0)
-        {
-            Shoot();
-            fireTimer = rpm;
-        }
+        
         if(target == null)
         {
             FindNewTarget();
+        }
+        
+    }
+    IEnumerator FireTimer()
+    {
+        while (true)
+        {
+            if (canShoot && target != null)
+            {
+                Shoot();
+                canShoot = false;  // Prevent continuous shooting
+                yield return new WaitForSeconds(rpm);  // Wait for fire rate interval
+                canShoot = true;
+            }
+            yield return null;  // Continue next frame
         }
     }
     private void Shoot()

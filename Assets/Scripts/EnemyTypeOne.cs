@@ -10,6 +10,7 @@ public class EnemyTypeOne : MonoBehaviour
     private float maxHealth = 100;
     public GameObject tower;
     public HealthBar healthBar;
+    
     // Start is called before the first frame update
     void Start()    
     {
@@ -48,6 +49,9 @@ public class EnemyTypeOne : MonoBehaviour
         if(other.CompareTag("defenderProjectile"))
         {
             int projectileDamage = other.GetComponent<DefenderProjectile>().defenderProjectileDmg;
+            GameObject goldFetch = GameObject.Find("WorldController");
+            goldFetch.GetComponent<PlayerRes>().gold += 5;
+            //GetComponent<PlayerRes>().gold += 5;
             TakeDamage(projectileDamage);
         }
     }
