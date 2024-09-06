@@ -9,6 +9,7 @@ public class cubeHighLight : MonoBehaviour
     private Color originalColor;
     public Color highlightColor = Color.yellow;
     public float flashSpeed = 2f;  // Speed of the color flash
+    public GameObject mainCamera;
 
     private bool isFlashing = false;
 
@@ -20,6 +21,14 @@ public class cubeHighLight : MonoBehaviour
     {
         cubeRenderer = GetComponent<Renderer>();
         originalColor = cubeRenderer.material.color;
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+    }
+    private void Update()
+    {
+        if(currentUI != null)
+        {
+            currentUI.transform.LookAt(currentUI.transform.position + mainCamera.transform.rotation * Vector3.forward, mainCamera.transform.rotation * Vector3.up);
+        }
     }
 
     void OnMouseDown()
