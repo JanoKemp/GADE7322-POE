@@ -48,6 +48,7 @@ public class EnemyTypeOne : MonoBehaviour
         if(other.CompareTag("defenderProjectile"))
         {
             int projectileDamage = other.GetComponent<DefenderProjectile>().defenderProjectileDmg;
+            GetComponent<PlayerRes>().gold += 5;
             TakeDamage(projectileDamage);
         }
     }
