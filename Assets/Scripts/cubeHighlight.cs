@@ -29,6 +29,11 @@ public class cubeHighLight : MonoBehaviour
         {
             currentUI.transform.LookAt(currentUI.transform.position + mainCamera.transform.rotation * Vector3.forward, mainCamera.transform.rotation * Vector3.up);
         }
+        if(Input.GetMouseButtonDown(1))
+        {
+            HideUI();
+            DeselectCube();
+        }
     }
 
     void OnMouseDown()
@@ -47,6 +52,16 @@ public class cubeHighLight : MonoBehaviour
 
         // Show the UI for this cube
         ShowUI();
+    }
+    public void DeselectCube()
+    {
+        if (selectedCube != null)
+        {
+            selectedCube.StopFlash();
+            selectedCube.RevertColor();
+            selectedCube = null; // Clear the selection
+            
+        }
     }
 
     // Couroutine for smooth flash from highlighted colour to original
