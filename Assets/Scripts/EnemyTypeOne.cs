@@ -13,7 +13,7 @@ public class EnemyTypeOne : MonoBehaviour
     public GameObject[] defenders;
     public GameObject mainTower;
     public GameObject target;
-    public float[] distanceOfTowers;
+    //public float[] distanceOfTowers;
 
     private bool canShoot = false;
     public float distanceToShootDefenders = 15f;
@@ -30,31 +30,40 @@ public class EnemyTypeOne : MonoBehaviour
         healthBar.UpdateHealth(health, maxHealth);
         defenders = GameObject.FindGameObjectsWithTag("Defender");
         mainTower = GameObject.FindGameObjectWithTag("PlayerTower");
+        StartCoroutine(Shoot());
     }
     private void FixedUpdate()
     {
+        target = null;
         TargetMainTower();
         defenders = GameObject.FindGameObjectsWithTag("Defender");
         if (defenders == null)
         {
-          
+        
         }
         else if(defenders != null)
-        { 
-            for(int i = 0; i < defenders.Length; i++)
+        {
+            for (int i = 0; i < defenders.Length; i++)
             {
                 float distance = Vector3.Distance(this.gameObject.transform.position, defenders[i].transform.position);
-                if(distance < distanceToShootDefenders)
+                if (distance < distanceToShootDefenders)
                 {
-                    target = defenders[i];
+                    target = defenders[i].gameObject;
+                    canShoot = true;
+                    break;  // Stop checking after finding a valid target
+                }
+                else
+                {
+                    canShoot=false;
                 }
             }
-            
+
         }
     }
     void Update()
     {
         agent.SetDestination(tower.transform.position);
+        
     }
 
     private void TargetMainTower()

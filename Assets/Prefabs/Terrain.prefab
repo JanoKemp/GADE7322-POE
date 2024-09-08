@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7816466175931494195}
   - component: {fileID: 3524273780177026222}
   - component: {fileID: -5610033452050056082}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Terrain
   m_TagString: LandBlock
   m_Icon: {fileID: 0}
@@ -120,5 +120,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   flashSpeed: 2
+  mainCamera: {fileID: 0}
   uiPrefab: {fileID: 6510421775056224622, guid: a177624d9b5fc324081704b310aa0b68, type: 3}
   objectToSpawn: {fileID: 3208218390758938427, guid: 9fcca84cd16008249816c06e13be91ce, type: 3}
