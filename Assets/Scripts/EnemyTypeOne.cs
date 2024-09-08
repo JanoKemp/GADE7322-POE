@@ -89,7 +89,7 @@ public class EnemyTypeOne : MonoBehaviour
         {
             if (canShoot && target != null)
             {
-                
+                Debug.Log("Shoot");
                 GameObject proj = Instantiate(projectile, projectile.transform.position, projectile.transform.rotation);
                 enemyProjectile bullet = proj.GetComponent<enemyProjectile>();
                 if (bullet != null)
@@ -131,6 +131,7 @@ public class EnemyTypeOne : MonoBehaviour
             goldFetch.GetComponent<PlayerRes>().gold += 5;
             //GetComponent<PlayerRes>().gold += 5;
             TakeDamage(projectileDamage);
+            other.GetComponent<DefenderProjectile>().target = null;
         }
     }
 }

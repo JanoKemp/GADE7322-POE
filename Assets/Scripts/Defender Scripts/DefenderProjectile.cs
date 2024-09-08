@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,7 +10,7 @@ public class DefenderProjectile : MonoBehaviour
     // Start is called before the first frame update
     public int defenderProjectileDmg = 10;
     private float speed = 10f;
-    Transform target;
+    public Transform target;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -27,7 +28,9 @@ public class DefenderProjectile : MonoBehaviour
         if (target == null)
         {
             Destroy(gameObject);
+            return;
         }
+        
 
 
 

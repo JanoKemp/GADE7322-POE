@@ -328,6 +328,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tower: {fileID: 0}
   healthBar: {fileID: 0}
+  defenders: []
+  mainTower: {fileID: 0}
+  target: {fileID: 0}
+  distanceOfTowers: []
+  distanceToShootDefenders: 15
+  projectile: {fileID: 4886673816215378650, guid: 1a0f02f10be0d2c4f9e6406a426f960a, type: 3}
 --- !u!65 &-6626375478582150400
 BoxCollider:
   m_ObjectHideFlags: 0
