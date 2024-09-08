@@ -10,9 +10,10 @@ public class DefenderTower : MonoBehaviour
     public Transform target;
     public GameObject defenderProj;
     public float rpm = 1.5f;
-    public int health;
-    public int maxHealth = 100;
+    public float health;
+    public float maxHealth = 100;
 
+    public HealthBar healthBar;
     private float fireTimer;
     private bool canShoot = true;
     // Start is called before the first frame update
@@ -21,6 +22,8 @@ public class DefenderTower : MonoBehaviour
         fireTimer = 0;
         health = maxHealth;
         StartCoroutine(FireTimer());
+        healthBar = GetComponentInChildren<HealthBar>();
+        healthBar.UpdateHealth(health, maxHealth);
 
     }
 
@@ -78,6 +81,28 @@ public class DefenderTower : MonoBehaviour
         if (nearestEnemy != null)
         {
             target = nearestEnemy.transform;
+        }
+    }
+    private void TakeDamage(float damage)
+    {
+
+        if (health > 0)
+        {
+            health -= damage;
+            healthBar.UpdateHealth(health, maxHealth);
+        }
+        if (health <= 0)
+        {
+           Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("enemyProjectile"))
+        {
+            TakeDamage(other.GetComponent<enemyProjectile>().enemyProjectileDmg);
+            Destroy(other);
         }
     }
 }

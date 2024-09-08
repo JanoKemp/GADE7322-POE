@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 625117256}
   m_Layer: 0
   m_Name: WorldController
-  m_TagString: Untagged
+  m_TagString: WorldController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -393,6 +393,7 @@ MonoBehaviour:
   landBlock: {fileID: 5690408032372946547, guid: 74ac7eac8861edf41a1f2291cd96f914, type: 3}
   pathBlock: {fileID: 3673258221321339792, guid: 0933f02eb462b0749a25ccfacc81e021, type: 3}
   enemySpawn: {fileID: 8881923140385099075, guid: c7610661673b8d8438cba3927f3bf813, type: 3}
+  centreCube: {fileID: 0}
   playerTower: {fileID: 5144920521968305184, guid: 0f25de0dcc52ef44fac0829d95ccd291, type: 3}
   spawnHeight: 1
   gridRadius: 30
@@ -628,6 +629,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -709,6 +711,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 52.872, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 939e99e9103cf5d4eba82f5a43b52697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusObject: {fileID: 0}
+  rotationSpeed: 100
+  distanceFromObject: 18.5
+  height: 15
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &1009222621
 GameObject:
   m_ObjectHideFlags: 0

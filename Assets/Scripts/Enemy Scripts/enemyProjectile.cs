@@ -12,7 +12,7 @@ public class enemyProjectile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        target = GameObject.FindGameObjectWithTag("Enemy").transform;
+        target = GameObject.FindGameObjectWithTag("Defender").transform;
     }
 
     public void Seek(GameObject _target)

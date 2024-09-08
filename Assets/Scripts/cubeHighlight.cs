@@ -128,6 +128,7 @@ public class cubeHighLight : MonoBehaviour
         {
             Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0); // Spawn on top of the cube
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+            DeselectCube();
         }
     }
 }

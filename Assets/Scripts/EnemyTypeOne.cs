@@ -99,7 +99,7 @@ public class EnemyTypeOne : MonoBehaviour
             if (canShoot && target != null)
             {
                 Debug.Log("Shoot");
-                GameObject proj = Instantiate(projectile, projectile.transform.position, projectile.transform.rotation);
+                GameObject proj = Instantiate(projectile, this.gameObject.transform.position, projectile.transform.rotation);
                 enemyProjectile bullet = proj.GetComponent<enemyProjectile>();
                 if (bullet != null)
                 {
