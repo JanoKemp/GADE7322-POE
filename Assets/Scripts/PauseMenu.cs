@@ -38,4 +38,14 @@ public class PauseMenu : MonoBehaviour
 
     }
 
+    public void Play()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    public void Quit()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
 }
