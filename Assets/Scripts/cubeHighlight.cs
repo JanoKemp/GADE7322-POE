@@ -23,17 +23,24 @@ public class cubeHighLight : MonoBehaviour
         originalColor = cubeRenderer.material.color;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
+
     private void Update()
     {
-        if(currentUI != null)
+        if (currentUI != null)
         {
             currentUI.transform.LookAt(currentUI.transform.position + mainCamera.transform.rotation * Vector3.forward, mainCamera.transform.rotation * Vector3.up);
+        }
+
+        // Right-click (Mouse Button 1) deselects the currently selected cube
+        if (Input.GetMouseButtonDown(1))
+        {
+            DeselectCube();
         }
     }
 
     void OnMouseDown()
     {
-        // Stop flashing and reset the previous cube if another one is selected
+        // If a different cube is already selected, stop its flash and reset color
         if (selectedCube != null && selectedCube != this)
         {
             selectedCube.StopFlash();
@@ -41,15 +48,27 @@ public class cubeHighLight : MonoBehaviour
             selectedCube.HideUI();
         }
 
-        // Set the currently selected cube
+        // Select the current cube
         selectedCube = this;
         StartCoroutine(FlashColor());
 
-        // Show the UI for this cube
+        // Show the UI for the current cube
         ShowUI();
     }
 
-    // Couroutine for smooth flash from highlighted colour to original
+    public void DeselectCube()
+    {
+        // If there is a cube selected, stop flashing and reset its color
+        if (selectedCube != null)
+        {
+            selectedCube.StopFlash();
+            selectedCube.RevertColor();
+            selectedCube.HideUI();
+            selectedCube = null;  // Clear the current selection
+        }
+    }
+
+    // Coroutine for smooth flashing between highlight color and original color
     IEnumerator FlashColor()
     {
         isFlashing = true;
@@ -74,7 +93,7 @@ public class cubeHighLight : MonoBehaviour
         cubeRenderer.material.color = originalColor;
     }
 
-    // Show the UI for this cube
+    // Show the UI above the cube
     public void ShowUI()
     {
         if (currentUI == null)
@@ -109,6 +128,7 @@ public class cubeHighLight : MonoBehaviour
         {
             Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0); // Spawn on top of the cube
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+            DeselectCube();
         }
     }
 }

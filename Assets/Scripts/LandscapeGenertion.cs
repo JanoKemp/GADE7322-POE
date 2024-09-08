@@ -8,7 +8,7 @@ public class LandscapeGeneration : MonoBehaviour
     public GameObject landBlock; // GameObject for individual landBlocks
     public GameObject pathBlock; // GameObject for smaller blocks along the path
     public GameObject enemySpawn;
-    private GameObject centreCube;
+    public GameObject centreCube;
     public GameObject playerTower;
     public int spawnHeight = 1;
     public int gridRadius = 30; // Grid radius

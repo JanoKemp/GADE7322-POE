@@ -11,6 +11,8 @@ TagManager:
   - defenderProjectile
   - Enemy
   - Defender
+  - WorldController
+  - enemyProjectile
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Water
   - UI
   - NoneWalkable
-  - 
+  - Terrain
   - 
   - 
   - 
