@@ -123,6 +123,8 @@ public class EnemyTypeOne : MonoBehaviour
         }
         if (health <= 0)
         {
+            GameObject goldFetch = GameObject.Find("WorldController");
+            goldFetch.GetComponent<PlayerRes>().gold += 5;
             Die();
         }
     }
@@ -136,8 +138,8 @@ public class EnemyTypeOne : MonoBehaviour
         if(other.CompareTag("defenderProjectile"))
         {
             int projectileDamage = other.GetComponent<DefenderProjectile>().defenderProjectileDmg;
-            GameObject goldFetch = GameObject.Find("WorldController");
-            goldFetch.GetComponent<PlayerRes>().gold += 5;
+           
+            
             //GetComponent<PlayerRes>().gold += 5;
             TakeDamage(projectileDamage);
             other.GetComponent<DefenderProjectile>().target = null;
