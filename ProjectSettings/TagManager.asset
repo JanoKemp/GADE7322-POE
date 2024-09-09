@@ -13,6 +13,8 @@ TagManager:
   - Defender
   - WorldController
   - enemyProjectile
+  - GamePlayUI
+  - GameOver
   layers:
   - Default
   - TransparentFX

@@ -1,21 +1,22 @@
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System.Collections;
 
 public class cubeHighLight : MonoBehaviour
 {
-    private static cubeHighLight selectedCube; // Keeps track of the currently selected cube
+    private static cubeHighLight selectedCube;
     private Renderer cubeRenderer;
     private Color originalColor;
     public Color highlightColor = Color.yellow;
-    public float flashSpeed = 2f;  // Speed of the color flash
+    public float flashSpeed = 2f;
     public GameObject mainCamera;
 
     private bool isFlashing = false;
 
-    public GameObject uiPrefab;  // The prefab for the UI with a button
-    private GameObject currentUI; // The current UI instance
-    public GameObject objectToSpawn; // The object to spawn on top of the selected cube
+    public GameObject uiPrefab;
+    private GameObject currentUI;
+    public GameObject objectToSpawn;
 
     void Start()
     {
@@ -31,15 +32,21 @@ public class cubeHighLight : MonoBehaviour
             currentUI.transform.LookAt(currentUI.transform.position + mainCamera.transform.rotation * Vector3.forward, mainCamera.transform.rotation * Vector3.up);
         }
 
-        // Right-click (Mouse Button 1) deselects the currently selected cube
         if (Input.GetMouseButtonDown(1))
         {
-            DeselectCube();
+            if (selectedCube != null)
+            {
+                DeselectCube();
+            }
         }
     }
 
     void OnMouseDown()
     {
+        // Prevent click action if the mouse is over any UI element
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         // If a different cube is already selected, stop its flash and reset color
         if (selectedCube != null && selectedCube != this)
         {
@@ -52,23 +59,20 @@ public class cubeHighLight : MonoBehaviour
         selectedCube = this;
         StartCoroutine(FlashColor());
 
-        // Show the UI for the current cube
         ShowUI();
     }
 
     public void DeselectCube()
     {
-        // If there is a cube selected, stop flashing and reset its color
         if (selectedCube != null)
         {
             selectedCube.StopFlash();
             selectedCube.RevertColor();
             selectedCube.HideUI();
-            selectedCube = null;  // Clear the current selection
+            selectedCube = null;
         }
     }
 
-    // Coroutine for smooth flashing between highlight color and original color
     IEnumerator FlashColor()
     {
         isFlashing = true;
@@ -93,26 +97,22 @@ public class cubeHighLight : MonoBehaviour
         cubeRenderer.material.color = originalColor;
     }
 
-    // Show the UI above the cube
     public void ShowUI()
     {
         if (currentUI == null)
         {
-            currentUI = Instantiate(uiPrefab); // Instantiate the UI prefab
+            currentUI = Instantiate(uiPrefab);
         }
 
-        // Position the UI above the cube
-        currentUI.transform.position = transform.position + new Vector3(0, 1.5f, 0); // Adjust the offset
+        currentUI.transform.position = transform.position + new Vector3(0, 1.5f, 0);
 
-        // Add listener to the button to spawn an object
         Button spawnButton = currentUI.GetComponentInChildren<Button>();
-        spawnButton.onClick.RemoveAllListeners(); // Clear previous listeners
+        spawnButton.onClick.RemoveAllListeners();
         spawnButton.onClick.AddListener(SpawnObjectOnCube);
 
         currentUI.SetActive(true);
     }
 
-    // Hide the UI
     public void HideUI()
     {
         if (currentUI != null)
@@ -121,12 +121,12 @@ public class cubeHighLight : MonoBehaviour
         }
     }
 
-    // Spawns an object on top of the selected cube
     public void SpawnObjectOnCube()
     {
-        if (objectToSpawn != null)
+        int gold = GameObject.FindGameObjectWithTag("WorldController").GetComponent<PlayerRes>().gold;
+        if (objectToSpawn != null && gold > 50)
         {
-            Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0); // Spawn on top of the cube
+            Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
             DeselectCube();
         }

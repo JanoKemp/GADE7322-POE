@@ -1,40 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class DefenderTower : MonoBehaviour
+public class MainTower : MonoBehaviour
 {
+    public float health;
+    public float maxHealth = 100f;
+    private HealthBar healthBar;
+
     public Transform target;
     public GameObject defenderProj;
     public float rpm = 1.5f;
-    public float health;
-    public float maxHealth = 100;
-
-    public HealthBar healthBar;
-    
     private bool canShoot = true;
+
+    public GameObject gameOverUI;
+
+    public bool gameOver = false;
     // Start is called before the first frame update
     void Start()
     {
-        //fireTimer = 0;
+        gameOverUI = GameObject.FindGameObjectWithTag("GameOver");
+        gameOverUI.SetActive(false);
         health = maxHealth;
-        StartCoroutine(FireTimer());
         healthBar = GetComponentInChildren<HealthBar>();
         healthBar.UpdateHealth(health, maxHealth);
-
+        StartCoroutine(passiveHealth());
+        StartCoroutine(FireTimer());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if(target == null)
+            if (target == null)
+            {
+                FindNewTarget();
+            }
+    }
+
+    IEnumerator passiveHealth()
+    {
+        if (health < 100)
         {
-            FindNewTarget();
+            health += 5;
+            yield return new WaitForSeconds(3f);
         }
+        else yield return null; 
         
     }
     IEnumerator FireTimer()
@@ -51,6 +62,7 @@ public class DefenderTower : MonoBehaviour
             yield return null;  // Continue next frame
         }
     }
+
     private void Shoot()
     {
         GameObject projectile = Instantiate(defenderProj, transform.position, transform.rotation);
@@ -83,6 +95,9 @@ public class DefenderTower : MonoBehaviour
             target = nearestEnemy.transform;
         }
     }
+
+
+
     private void TakeDamage(float damage)
     {
 
@@ -93,18 +108,19 @@ public class DefenderTower : MonoBehaviour
         }
         if (health <= 0)
         {
-           Destroy(gameObject);
+            gameOverUI.SetActive(true);
+            gameOver = true;
+            
         }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("enemyProjectile"))
+        if(other.CompareTag("Enemy"))
         {
-            TakeDamage(other.GetComponent<enemyProjectile>().enemyProjectileDmg);
+            TakeDamage(25f);
             Destroy(other.gameObject);
         }
     }
-
-   
 }
