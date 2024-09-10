@@ -14,14 +14,14 @@ public class GameUi : MonoBehaviour
     private MainTower mainTower;
     private bool gameOver;
     public GameObject UI;
-    private bool updateGameOverUI = false;
+    private int updateGameOverUI = 0;
     
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1f;
         playerRes = GameObject.FindGameObjectWithTag("WorldController").GetComponent<PlayerRes>();
-        
+        updateGameOverUI = 0;
         
     }
 
@@ -32,13 +32,13 @@ public class GameUi : MonoBehaviour
         gameOver = mainTower.gameOver;
         if(gameOver)
         {
-            updateGameOverUI = true;
+            
         }
-        if(gameOver && updateGameOverUI)
+        if(gameOver && updateGameOverUI < 1)
         {
-
+            updateGameOverUI += 1;
             finalUpdate();
-            updateGameOverUI=false;
+            
         }
         
         
