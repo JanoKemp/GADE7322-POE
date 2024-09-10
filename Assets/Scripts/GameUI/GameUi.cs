@@ -49,7 +49,7 @@ public class GameUi : MonoBehaviour
     {
         Time.timeScale = 0.2f;
         lossTitle.text = "Game Over - You Lost";
-        enemiesKilled.text = "Enemies Killed: " + playerRes.enemiesKilled.ToString();
+        //enemiesKilled.text = "Enemies Killed: " + playerRes.enemiesKilled.ToString();
         timeSurvived.text = "Time Survived: " + playerRes.TimeSurvived.ToString();
 
     }
