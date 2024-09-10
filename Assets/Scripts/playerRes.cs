@@ -12,7 +12,8 @@ public class PlayerRes : MonoBehaviour
 
     public int enemiesKilled = 0;
     public int bulletsFired = 0;
-    public float TimeSurvived = 0;
+    public int TimeSurvived = 0;
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +27,15 @@ public class PlayerRes : MonoBehaviour
         goldPerSecond -= Time.deltaTime;
         if(goldPerSecond <= 0 )
         {
-            gold++;
+            gold+= 2;
             goldPerSecond = 1f;
         }
-        TimeSurvived = Time.realtimeSinceStartup;
+        TimeSurvived = (int)Time.realtimeSinceStartup;
+    }
+
+    public void MinusGold(int goldCost)
+    {
+        gold -= goldCost;
     }
 
     public string DisplayGold()

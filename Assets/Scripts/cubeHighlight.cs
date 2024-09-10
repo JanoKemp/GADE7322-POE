@@ -18,6 +18,8 @@ public class cubeHighLight : MonoBehaviour
     private GameObject currentUI;
     public GameObject objectToSpawn;
 
+    private PlayerRes playerGold;
+
     void Start()
     {
         cubeRenderer = GetComponent<Renderer>();
@@ -123,9 +125,11 @@ public class cubeHighLight : MonoBehaviour
 
     public void SpawnObjectOnCube()
     {
+        playerGold = GameObject.FindGameObjectWithTag("WorldController").GetComponent<PlayerRes>();
         int gold = GameObject.FindGameObjectWithTag("WorldController").GetComponent<PlayerRes>().gold;
         if (objectToSpawn != null && gold > 50)
         {
+            playerGold.MinusGold(50);
             Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
             DeselectCube();
