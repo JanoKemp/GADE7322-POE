@@ -699,6 +699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawns: []
   enemyPrefab: {fileID: 4335034817221262413, guid: 4ec816c61d0e2e24ca540091dda2386f, type: 3}
+  shotgunPrefab: {fileID: 2418308638885956024, guid: aa8f039d85526fe4a875e8cd09de3b5c, type: 3}
 --- !u!114 &625117255
 MonoBehaviour:
   m_ObjectHideFlags: 0

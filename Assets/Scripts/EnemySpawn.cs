@@ -6,6 +6,7 @@ public class EnemySpawn : MonoBehaviour
 {
     public GameObject[] enemySpawns;
     public GameObject enemyPrefab;
+    public GameObject shotgunPrefab;
     private float spawnTimer;
     private float spawnSpeed;
     enum Waves // For the first part we use wave 1 only
@@ -22,7 +23,7 @@ public class EnemySpawn : MonoBehaviour
     void SpawnEnemies()
     {
         int randSpawn = Random.Range(0, 3);
-        Debug.Log(randSpawn);
+        
         
         switch (randSpawn)
         {

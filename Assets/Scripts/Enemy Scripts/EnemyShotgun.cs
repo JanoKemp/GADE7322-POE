@@ -4,29 +4,32 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyTypeOne : MonoBehaviour
+public class EnemyShotgun : MonoBehaviour
 {
     private NavMeshAgent agent;
     private float health;
-    private float maxHealth = 100;
+    private float maxHealth = 50;
     public GameObject tower;
     public HealthBar healthBar;
     public GameObject[] defenders;
     public GameObject mainTower;
     public GameObject target;
-    
+    public Transform[] projectileSpawns;
+
     //public float[] distanceOfTowers;
 
     private bool canShoot = false;
-    public float distanceToShootDefenders = 15f;
+    public float distanceToShootDefenders = 10f; //Distance is less (Closer for shotgun
 
-    public GameObject projectile;
-    
+    public GameObject shotgunProjectile;
+
     // Start is called before the first frame update
-    void Start()    
+    void Start()
     {
+
         health = maxHealth;
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = 2.2f; //Faster Move speed (Base 1.46f)
         tower = GameObject.FindGameObjectWithTag("PlayerTower");
         healthBar = GetComponentInChildren<HealthBar>();
         healthBar.UpdateHealth(health, maxHealth);
@@ -36,14 +39,15 @@ public class EnemyTypeOne : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        
         target = null;
         TargetMainTower();
         defenders = GameObject.FindGameObjectsWithTag("Defender");
         if (defenders == null)
         {
-        
+            
         }
-        else if(defenders != null)
+        else if (defenders != null)
         {
             for (int i = 0; i < defenders.Length; i++)
             {
@@ -56,43 +60,44 @@ public class EnemyTypeOne : MonoBehaviour
                 }
                 else
                 {
-                    canShoot=false;
+                    canShoot = false;
                 }
             }
-            
+
         }
-        
+
     }
     void Update()
     {
         agent.SetDestination(tower.transform.position);
         
+
     }
 
     private void TargetMainTower()
     {
-        
+
         float distanceToTower = Vector3.Distance(this.gameObject.transform.position, mainTower.transform.position);
-        if(distanceToTower < 2f)
+        if (distanceToTower < 2f)
         {
             target = mainTower;
         }
-        
+
     }
     private void Attack()
     {
-        if(target == null)
+        if (target == null)
         {
-            
+
             return;
         }
-        if(target != null && target.tag != "MainTower")
+        if (target != null && target.tag != "MainTower")
         {
-            StartCoroutine(Shoot());  
+            StartCoroutine(Shoot());
         }
-        if(target != null && target.tag == "MainTower")
+        if (target != null && target.tag == "MainTower")
         {
-           //To be done later
+            //To be done later
         }
     }
     IEnumerator Shoot()
@@ -101,12 +106,12 @@ public class EnemyTypeOne : MonoBehaviour
         {
             if (canShoot && target != null)
             {
-                Debug.Log("Shoot");
-                GameObject proj = Instantiate(projectile, this.gameObject.transform.position, projectile.transform.rotation);
-                enemyProjectile bullet = proj.GetComponent<enemyProjectile>();
-                if (bullet != null)
+                transform.LookAt(target.transform.position);
+                for (int index = 0; index < projectileSpawns.Length; index++)
                 {
-                    bullet.Seek(target);
+                  Instantiate(shotgunProjectile, projectileSpawns[index].transform.position, projectileSpawns[index].rotation);
+                    
+                    
                 }
                 canShoot = false;  // Prevent continuous shooting
                 yield return new WaitForSeconds(2f);  // Wait for fire rate interval
@@ -119,7 +124,7 @@ public class EnemyTypeOne : MonoBehaviour
     private void TakeDamage(float damage)
     {
 
-        if(health > 0 )
+        if (health > 0)
         {
             health -= damage;
             healthBar.UpdateHealth(health, maxHealth);
@@ -138,11 +143,11 @@ public class EnemyTypeOne : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("defenderProjectile"))
+        if (other.CompareTag("defenderProjectile"))
         {
             int projectileDamage = other.GetComponent<DefenderProjectile>().defenderProjectileDmg;
-           
-            
+
+
             //GetComponent<PlayerRes>().gold += 5;
             TakeDamage(projectileDamage);
             other.GetComponent<DefenderProjectile>().target = null;
