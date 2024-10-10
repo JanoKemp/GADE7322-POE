@@ -15,6 +15,8 @@ TagManager:
   - enemyProjectile
   - GamePlayUI
   - GameOver
+  - TankProjectile
+  - Tank
   layers:
   - Default
   - TransparentFX

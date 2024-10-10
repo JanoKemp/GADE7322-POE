@@ -6,6 +6,7 @@ public class EnemySpawn : MonoBehaviour
 {
     public GameObject[] enemySpawns;
     public GameObject enemyPrefab;
+    public GameObject tankPrefab;
     private float spawnTimer;
     private float spawnSpeed;
     enum Waves // For the first part we use wave 1 only
@@ -23,8 +24,19 @@ public class EnemySpawn : MonoBehaviour
     {
         int randSpawn = Random.Range(0, 3);
         Debug.Log(randSpawn);
+
+        int enemyType = Random.Range(0, 2);
+
+        if (enemyType == 0)
+        {
+            Instantiate(enemyPrefab, enemySpawns[randSpawn].transform.position, Quaternion.identity);
+            Debug.Log("Spawned Regular Enemy");
+        }else if (enemyType == 1) {
+            Instantiate(tankPrefab, enemySpawns[randSpawn].transform.position, Quaternion.identity);
+            Debug.Log("Spawned tank Enemy");
+        }
         
-        switch (randSpawn)
+        /*switch (randSpawn)
         {
             case 0:
                 Instantiate(enemyPrefab, enemySpawns[0].transform.position, transform.rotation); break;
@@ -33,7 +45,7 @@ public class EnemySpawn : MonoBehaviour
                 case 2:
                 Instantiate(enemyPrefab, enemySpawns[2].transform.position, transform.rotation); break;
         }
-        
+        */
     }
 
     // Update is called once per frame
