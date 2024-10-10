@@ -49,6 +49,7 @@ public class EnemyTypeOne : MonoBehaviour
                 if (distance < distanceToShootDefenders)
                 {
                     target = defenders[i].gameObject;
+                    Debug.Log("normal enemy found target");
                     canShoot = true;
                     break;  // Stop checking after finding a valid target
                 }

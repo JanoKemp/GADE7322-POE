@@ -41,12 +41,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7765087126551890925}
   - component: {fileID: 1968209257568115763}
-  - component: {fileID: 4199240910859672858}
   - component: {fileID: 5404099629906976040}
   - component: {fileID: 6455842836092118090}
+  - component: {fileID: 5718523525931140229}
   m_Layer: 0
   m_Name: Tank2
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,28 +89,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4199240910859672858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8848082360539350065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec4de986d0fe6ea41806e4d5b53d2a92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tower: {fileID: 3208218390758938427, guid: 9fcca84cd16008249816c06e13be91ce, type: 3}
-  healthBar: {fileID: 0}
-  defenders: []
-  mainTower: {fileID: 5144920521968305184, guid: 0f25de0dcc52ef44fac0829d95ccd291, type: 3}
-  target: {fileID: 0}
-  distanceToShootDefenders: 30
-  projectile: {fileID: 5440349738110633306, guid: ecaea3de441c721439bea2a722eae39c, type: 3}
-  shootingPoint: {fileID: 4967962903816110218}
-  turret: {fileID: 9143944453757735785}
-  tankBase: {fileID: 3816129579695028308}
 --- !u!136 &5404099629906976040
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -149,12 +127,34 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5718523525931140229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848082360539350065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4de986d0fe6ea41806e4d5b53d2a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 0}
+  healthBar: {fileID: 0}
+  defenders: []
+  mainTower: {fileID: 0}
+  target: {fileID: 0}
+  distanceToShootDefenders: 15
+  turretTransform: {fileID: 9143944453757735785}
+  firePoint: {fileID: 4967962903816110218}
+  fireRate: 5
+  projectile: {fileID: 4886673816215378650, guid: 1a0f02f10be0d2c4f9e6406a426f960a, type: 3}
 --- !u!1001 &3710725158980837311
 PrefabInstance:
   m_ObjectHideFlags: 0
