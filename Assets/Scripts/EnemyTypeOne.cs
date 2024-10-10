@@ -147,5 +147,15 @@ public class EnemyTypeOne : MonoBehaviour
             TakeDamage(projectileDamage);
             other.GetComponent<DefenderProjectile>().target = null;
         }
+        if (other.CompareTag("RippleProjectile"))
+        {
+            int projectileDamage = other.GetComponent<RippleProjectile>().projectileRippleDmg;
+
+
+            //GetComponent<PlayerRes>().gold += 5;
+            TakeDamage(projectileDamage);
+            
+        }
+
     }
 }
