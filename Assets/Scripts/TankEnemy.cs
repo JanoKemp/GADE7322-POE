@@ -27,7 +27,7 @@ public class TankEnemy : MonoBehaviour
     {
         health = maxHealth;
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = 2f;  // Slow movement speed
+        agent.speed = 1f;  // Slow movement speed
         tower = GameObject.FindGameObjectWithTag("PlayerTower");
         healthBar = GetComponentInChildren<HealthBar>();
         healthBar.UpdateHealth(health, maxHealth);
@@ -39,6 +39,32 @@ public class TankEnemy : MonoBehaviour
     private void FixedUpdate()
     {
         target = null;
+        TargetMainTower();
+        defenders = GameObject.FindGameObjectsWithTag("Defender");
+        if (defenders == null)
+        {
+
+        }
+        else if (defenders != null)
+        {
+            for (int i = 0; i < defenders.Length; i++)
+            {
+                float distance = Vector3.Distance(this.gameObject.transform.position, defenders[i].transform.position);
+                if (distance < distanceToShootDefenders)
+                {
+                    target = defenders[i].gameObject;
+                    canShoot = true;
+                    RotateTurretTowardsTarget(target);  // Rotate turret towards the defender
+                    break;  // Stop checking after finding a valid target
+                }
+                else
+                {
+                    canShoot = false;
+                }
+            }
+
+        }
+        /*target = null;
         TargetMainTower();
         defenders = GameObject.FindGameObjectsWithTag("Defender");
         if (defenders != null)
@@ -58,7 +84,9 @@ public class TankEnemy : MonoBehaviour
                     canShoot = false;
                 }
             }
-        }
+        }*/
+
+        RotateTankBase();
     }
 
     void Update()
@@ -88,7 +116,7 @@ public class TankEnemy : MonoBehaviour
         turret.rotation = Quaternion.Slerp(turret.rotation, lookRotation, Time.deltaTime * 5f);  // Adjust 5f for speed of rotation
     }
 
-    private void RotateTankBase(GameObject target)
+    private void RotateTankBase()
     {
         Vector3 velocity = agent.velocity;
 
