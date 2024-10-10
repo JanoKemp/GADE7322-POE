@@ -7,6 +7,7 @@ public class EnemySpawn : MonoBehaviour
     public GameObject[] enemySpawns;
     public GameObject enemyPrefab;
     public GameObject shotgunPrefab;
+    public GameObject tank;
     private float spawnTimer;
     private float spawnSpeed;
     enum Waves // For the first part we use wave 1 only
@@ -28,11 +29,11 @@ public class EnemySpawn : MonoBehaviour
         switch (randSpawn)
         {
             case 0:
-                Instantiate(enemyPrefab, enemySpawns[0].transform.position, transform.rotation); break;
+                Instantiate(tank, enemySpawns[0].transform.position, transform.rotation); break;
                 case 1:
-                Instantiate(enemyPrefab, enemySpawns[1].transform.position, transform.rotation); break;
+                Instantiate(tank, enemySpawns[1].transform.position, transform.rotation); break;
                 case 2:
-                Instantiate(enemyPrefab, enemySpawns[2].transform.position, transform.rotation); break;
+                Instantiate(tank, enemySpawns[2].transform.position, transform.rotation); break;
         }
         
     }
