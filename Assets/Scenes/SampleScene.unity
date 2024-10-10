@@ -699,7 +699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawns: []
   enemyPrefab: {fileID: 4335034817221262413, guid: 4ec816c61d0e2e24ca540091dda2386f, type: 3}
-  tankPrefab: {fileID: 8848082360539350065, guid: 6403726a770adeb42ace5a2d960ba663, type: 3}
+  tankPrefab: {fileID: 5893163888034777575, guid: 985020b0d8d2d984c8bce4440b855d41, type: 3}
 --- !u!114 &625117255
 MonoBehaviour:
   m_ObjectHideFlags: 0
