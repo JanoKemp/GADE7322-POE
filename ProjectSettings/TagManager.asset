@@ -16,6 +16,7 @@ TagManager:
   - GamePlayUI
   - GameOver
   - ShotgunProjectile
+  - RippleProjectile
   layers:
   - Default
   - TransparentFX

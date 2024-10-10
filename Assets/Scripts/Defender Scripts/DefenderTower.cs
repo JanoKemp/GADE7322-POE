@@ -99,14 +99,18 @@ public class DefenderTower : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("enemyProjectile"))
+        if (other.CompareTag("enemyProjectile"))
         {
             TakeDamage(other.GetComponent<enemyProjectile>().enemyProjectileDmg);
             Destroy(other.gameObject);
         }
-        if(other.CompareTag("ShotgunProjectile"))
+        if (other.CompareTag("ShotgunProjectile"))
         {
             TakeDamage(other.GetComponent<ShotgunProjectile>().projectileDmg);
+        }
+        if (other.CompareTag("RippleProjectile"))
+        {
+            TakeDamage(other.GetComponent<RippleProjectile>().projectileRippleDmg);
         }
     }
 

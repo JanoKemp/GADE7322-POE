@@ -94,6 +94,7 @@ public class EnemyShotgun : MonoBehaviour
         if (target != null && target.tag != "MainTower")
         {
             StartCoroutine(Shoot());
+            transform.LookAt(target.transform.position);
         }
         if (target != null && target.tag == "MainTower")
         {
@@ -106,7 +107,7 @@ public class EnemyShotgun : MonoBehaviour
         {
             if (canShoot && target != null)
             {
-                transform.LookAt(target.transform.position);
+                
                 for (int index = 0; index < projectileSpawns.Length; index++)
                 {
                   Instantiate(shotgunProjectile, projectileSpawns[index].transform.position, projectileSpawns[index].rotation);
