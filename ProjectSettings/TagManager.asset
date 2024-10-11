@@ -17,6 +17,7 @@ TagManager:
   - GameOver
   - ShotgunProjectile
   - RippleProjectile
+  - tankProjectile
   layers:
   - Default
   - TransparentFX
