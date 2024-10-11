@@ -700,7 +700,7 @@ MonoBehaviour:
   enemySpawns: []
   enemyPrefab: {fileID: 4335034817221262413, guid: 4ec816c61d0e2e24ca540091dda2386f, type: 3}
   shotgunPrefab: {fileID: 2418308638885956024, guid: aa8f039d85526fe4a875e8cd09de3b5c, type: 3}
-  tank: {fileID: 7146380869867191694, guid: 6f5dbd9c4ea130a4d915600b34ea3d95, type: 3}
+  tank: {fileID: 5931523988476659892, guid: ad539a49d432b1842aea1c756719ce14, type: 3}
 --- !u!114 &625117255
 MonoBehaviour:
   m_ObjectHideFlags: 0
