@@ -6,8 +6,8 @@ public class tankProjectile : MonoBehaviour
 {
     Rigidbody rb;
     // Start is called before the first frame update
-    public int enemyProjectileDmg = 5;
-    private float speed = 10f;
+    public int tankProjectileDmg = 10;
+    private float speed = 7f;
     Transform target;
     void Start()
     {

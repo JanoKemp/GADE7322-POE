@@ -435,15 +435,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 880e1f1d0f135c940a463f9acb59b073, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.45571777
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 880e1f1d0f135c940a463f9acb59b073, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.45571777
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 880e1f1d0f135c940a463f9acb59b073, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.45571777
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 880e1f1d0f135c940a463f9acb59b073, type: 3}
       propertyPath: m_LocalPosition.x
@@ -605,8 +605,9 @@ MonoBehaviour:
   mainTower: {fileID: 0}
   target: {fileID: 0}
   firePoint: {fileID: 7407359937323502641}
+  turret: {fileID: 8795398414024902445}
+  projectile: {fileID: 5440349738110633306, guid: 8f87439f7b6113f48827793be46a492a, type: 3}
   distanceToShootDefenders: 25
-  projectile: {fileID: 4886673816215378650, guid: 1a0f02f10be0d2c4f9e6406a426f960a, type: 3}
 --- !u!4 &6420674053466247694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 880e1f1d0f135c940a463f9acb59b073, type: 3}
@@ -675,5 +676,10 @@ PrefabInstance:
 --- !u!4 &8161746201634233751 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dc3ce9beb69fa33469944b0f2f95927d, type: 3}
+  m_PrefabInstance: {fileID: 8561027950436170364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8795398414024902445 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: dc3ce9beb69fa33469944b0f2f95927d, type: 3}
   m_PrefabInstance: {fileID: 8561027950436170364}
   m_PrefabAsset: {fileID: 0}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class TankEnemy : MonoBehaviour
 {
@@ -14,14 +15,20 @@ public class TankEnemy : MonoBehaviour
     public GameObject mainTower;
     public GameObject target;
     public Transform firePoint;
+    public GameObject turret;
+    public GameObject projectile;
 
 
     //public float[] distanceOfTowers;
 
     private bool canShoot = false;
-    public float distanceToShootDefenders = 25f; 
+    public float distanceToShootDefenders = 25f;
+    public float stopDistance = 10f;
 
-    public GameObject projectile;
+   
+
+    private Quaternion desiredTurretRotation;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +37,7 @@ public class TankEnemy : MonoBehaviour
         health = maxHealth;
         agent = GetComponent<NavMeshAgent>();
         agent.speed = 1f; //Faster Move speed (Base 1.46f)
+        agent.stoppingDistance = stopDistance;
         tower = GameObject.FindGameObjectWithTag("PlayerTower");
         healthBar = GetComponentInChildren<HealthBar>();
         healthBar.UpdateHealth(health, maxHealth);
@@ -67,10 +75,17 @@ public class TankEnemy : MonoBehaviour
 
         }
 
+        RotateTurretTowardsTarget();
+
     }
     void Update()
     {
-        agent.SetDestination(tower.transform.position);
+        if (Vector3.Distance(transform.position, mainTower.transform.position)>stopDistance)
+        {
+            agent.SetDestination(tower.transform.position);
+
+        }
+        else agent.ResetPath();
 
 
     }
@@ -85,6 +100,19 @@ public class TankEnemy : MonoBehaviour
         }
 
     }
+
+    private void RotateTurretTowardsTarget()
+    {
+        if(target!=null)
+        {
+            Vector3 directiontoTarget = target.transform.position - turret.transform.position;
+            directiontoTarget.y = 0;
+
+            desiredTurretRotation=Quaternion.LookRotation(directiontoTarget);
+            turret.transform.rotation = Quaternion.Slerp(turret.transform.rotation, desiredTurretRotation,Time.deltaTime * 5f);
+        }
+    }
+
     private void Attack()
     {
         if (target == null)
@@ -116,7 +144,7 @@ public class TankEnemy : MonoBehaviour
                     bullet.Seek(target);
                 }
                 canShoot = false;  // Prevent continuous shooting
-                yield return new WaitForSeconds(2f);  // Wait for fire rate interval
+                yield return new WaitForSeconds(5f);  // Wait for fire rate interval
                 canShoot = true;
             }
             yield return null;  // Continue next frame
@@ -134,7 +162,7 @@ public class TankEnemy : MonoBehaviour
         if (health <= 0)
         {
             GameObject goldFetch = GameObject.Find("WorldController");
-            goldFetch.GetComponent<PlayerRes>().gold += 5;
+            goldFetch.GetComponent<PlayerRes>().gold += 10;
             Die();
         }
     }
