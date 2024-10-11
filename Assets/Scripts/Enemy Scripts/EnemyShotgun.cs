@@ -70,7 +70,10 @@ public class EnemyShotgun : MonoBehaviour
     void Update()
     {
         agent.SetDestination(tower.transform.position);
-        
+        if(target != null)
+        {
+            transform.LookAt(target.transform.position);
+        }
 
     }
 
@@ -122,7 +125,7 @@ public class EnemyShotgun : MonoBehaviour
         }
     }
 
-    private void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
 
         if (health > 0)
@@ -133,7 +136,7 @@ public class EnemyShotgun : MonoBehaviour
         if (health <= 0)
         {
             GameObject goldFetch = GameObject.Find("WorldController");
-            goldFetch.GetComponent<PlayerRes>().gold += 5;
+            goldFetch.GetComponent<PlayerRes>().gold += 20;
             Die();
         }
     }
@@ -152,6 +155,12 @@ public class EnemyShotgun : MonoBehaviour
             //GetComponent<PlayerRes>().gold += 5;
             TakeDamage(projectileDamage);
             other.GetComponent<DefenderProjectile>().target = null;
+        }
+        if (other.CompareTag("RippleProjectile"))
+        {
+            int projectileDamage = other.GetComponent<RippleProjectile>().projectileRippleDmg;
+            TakeDamage(projectileDamage);
+            
         }
     }
 }

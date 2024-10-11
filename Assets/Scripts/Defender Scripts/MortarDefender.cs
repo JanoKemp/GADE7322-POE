@@ -5,14 +5,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class DefenderTower : MonoBehaviour
+public class MortarDefender : MonoBehaviour
 {
     public Transform target;
-    public GameObject defenderProj;
-    public float rpm = 1.5f;
+    public GameObject mortarProjectile;
+    public float rpm = 10f;
     public float health;
-    public float maxHealth = 100;
-
+    public float maxHealth = 200;
+    public Transform firingPoint;
     public HealthBar healthBar;
     
     private bool canShoot = true;
@@ -30,12 +30,12 @@ public class DefenderTower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(target == null)
+
+        if (target == null)
         {
             FindNewTarget();
         }
-        
+
     }
     IEnumerator FireTimer()
     {
@@ -53,14 +53,13 @@ public class DefenderTower : MonoBehaviour
     }
     private void Shoot()
     {
-        GameObject projectile = Instantiate(defenderProj, transform.position, transform.rotation);
-        DefenderProjectile bullet = projectile.GetComponent<DefenderProjectile>();
-        if (bullet != null)
+        GameObject projectile = Instantiate(mortarProjectile, firingPoint.position, transform.rotation);
+        MortarProjectile mortarRound = projectile.GetComponent<MortarProjectile>();
+
+        if (mortarRound != null)
         {
-            bullet.Seek(target);
+            mortarRound.FetchTarget(target);
         }
-
-
 
     }
     private void FindNewTarget()
@@ -93,7 +92,7 @@ public class DefenderTower : MonoBehaviour
         }
         if (health <= 0)
         {
-           Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -107,7 +106,6 @@ public class DefenderTower : MonoBehaviour
         if (other.CompareTag("ShotgunProjectile"))
         {
             TakeDamage(other.GetComponent<ShotgunProjectile>().projectileDmg);
-            
         }
         if (other.CompareTag("tankProjectile"))
         {
@@ -116,5 +114,5 @@ public class DefenderTower : MonoBehaviour
         }
     }
 
-   
+
 }

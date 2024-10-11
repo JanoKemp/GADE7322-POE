@@ -7,7 +7,7 @@ public class RippleDefender : MonoBehaviour
 { 
 public Transform target;
 public GameObject rippleProjectile;
-public float rpm = 2.2f;// Default 1.5(shoots slower, does more damage)
+private float rpm = 3f;// Default 1.5(shoots slower, does more damage)
 public float health;
 public float maxHealth = 60;
 public Transform firePoint;
@@ -123,11 +123,12 @@ private void OnTriggerEnter(Collider other)
     {
         TakeDamage(other.GetComponent<ShotgunProjectile>().projectileDmg);
     }
-    if(other.CompareTag("RippleProjectile"))
+        if (other.CompareTag("tankProjectile"))
         {
-            TakeDamage(other.GetComponent<RippleProjectile>().projectileRippleDmg);
+            TakeDamage(other.GetComponent<tankProjectile>().tankProjectileDmg);
+            Destroy(other.gameObject);
         }
-}
+    }
 
    
 }

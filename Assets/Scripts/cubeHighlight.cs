@@ -17,7 +17,7 @@ public class cubeHighLight : MonoBehaviour
     public GameObject uiPrefab;
     private GameObject currentUI;
     public GameObject objectToSpawn;
-
+    public GameObject[] Towers;
     private PlayerRes playerGold;
 
     void Start()
@@ -40,6 +40,18 @@ public class cubeHighLight : MonoBehaviour
             {
                 DeselectCube();
             }
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            objectToSpawn = Towers[0];
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            objectToSpawn = Towers[1];
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            objectToSpawn = Towers[2];
         }
     }
 
@@ -127,12 +139,29 @@ public class cubeHighLight : MonoBehaviour
     {
         playerGold = GameObject.FindGameObjectWithTag("WorldController").GetComponent<PlayerRes>();
         int gold = GameObject.FindGameObjectWithTag("WorldController").GetComponent<PlayerRes>().gold;
-        if (objectToSpawn != null && gold > 50)
+        int towerIndex = System.Array.IndexOf(Towers, objectToSpawn);
+        if (towerIndex == 0 && gold >= 50)
         {
             playerGold.MinusGold(50);
             Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
             DeselectCube();
         }
+        if(towerIndex == 1 && gold >= 75)
+        {
+            playerGold.MinusGold(75);
+            Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
+            Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+            DeselectCube();
+        }
+        if (towerIndex == 2 && gold >= 100)
+        {
+            playerGold.MinusGold(100);
+            Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
+            Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+            DeselectCube();
+        }
+
+
     }
 }

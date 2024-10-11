@@ -26,6 +26,7 @@ public class enemyProjectile : MonoBehaviour
         if (target == null)
         {
             Destroy(gameObject);
+            return;
         }
 
 

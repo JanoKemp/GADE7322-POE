@@ -9,7 +9,7 @@ public class RippleProjectile : MonoBehaviour
     // Start is called before the first frame update
     public GameObject[] Targets;
     public GameObject currentTarget;
-    public int projectileRippleDmg = 6;
+    public int projectileRippleDmg = 7;
     public Rigidbody rb;
     private int hitCounter = 0;
     private float speed = 20f;
@@ -24,7 +24,10 @@ public class RippleProjectile : MonoBehaviour
     void Update()
     {
         
-
+        if(currentTarget == null )
+        {
+            Destroy(gameObject);
+        }
 
         Vector3 dir = currentTarget.transform.position - transform.position;//+ new Vector3(0f, 5f, 0f) - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;

@@ -151,7 +151,7 @@ public class TankEnemy : MonoBehaviour
         }
     }
 
-    private void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
 
         if (health > 0)
@@ -162,12 +162,12 @@ public class TankEnemy : MonoBehaviour
         if (health <= 0)
         {
             GameObject goldFetch = GameObject.Find("WorldController");
-            goldFetch.GetComponent<PlayerRes>().gold += 10;
+            goldFetch.GetComponent<PlayerRes>().gold += 40;
             Die();
         }
     }
 
-    private void Die() { Destroy(gameObject); }
+    private void Die() {Destroy(gameObject); }
 
     // Update is called once per frame
 
@@ -181,6 +181,15 @@ public class TankEnemy : MonoBehaviour
             //GetComponent<PlayerRes>().gold += 5;
             TakeDamage(projectileDamage);
             other.GetComponent<DefenderProjectile>().target = null;
+        }
+        if (other.CompareTag("RippleProjectile"))
+        {
+            int projectileDamage = other.GetComponent<RippleProjectile>().projectileRippleDmg;
+
+
+            //GetComponent<PlayerRes>().gold += 5;
+            TakeDamage(projectileDamage);
+
         }
     }
 }
