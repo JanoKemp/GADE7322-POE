@@ -115,6 +115,7 @@ public class DefenderTower : MonoBehaviour
         if (other.CompareTag("tankProjectile"))
         {
             TakeDamage(other.GetComponent<tankProjectile>().tankProjectileDmg);
+            Destroy(other.gameObject);
         }
     }
 
