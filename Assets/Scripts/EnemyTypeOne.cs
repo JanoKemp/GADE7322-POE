@@ -116,7 +116,7 @@ public class EnemyTypeOne : MonoBehaviour
         }
     }
 
-    private void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
 
         if(health > 0 )

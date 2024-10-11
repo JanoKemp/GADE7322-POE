@@ -18,6 +18,7 @@ TagManager:
   - ShotgunProjectile
   - RippleProjectile
   - tankProjectile
+  - MortarProjectile
   layers:
   - Default
   - TransparentFX
