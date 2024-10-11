@@ -70,7 +70,10 @@ public class EnemyShotgun : MonoBehaviour
     void Update()
     {
         agent.SetDestination(tower.transform.position);
-        
+        if(target != null)
+        {
+            transform.LookAt(target.transform.position);
+        }
 
     }
 
@@ -133,7 +136,7 @@ public class EnemyShotgun : MonoBehaviour
         if (health <= 0)
         {
             GameObject goldFetch = GameObject.Find("WorldController");
-            goldFetch.GetComponent<PlayerRes>().gold += 5;
+            goldFetch.GetComponent<PlayerRes>().gold += 20;
             Die();
         }
     }

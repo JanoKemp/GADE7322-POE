@@ -37,30 +37,22 @@ public class MortarProjectile : MonoBehaviour
         }
 
 
-
-        /*
-        Vector3 dir = target.position - transform.position;//+ new Vector3(0f, 5f, 0f) - transform.position;
-        float distanceThisFrame = speed * Time.deltaTime;
-
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        */
-
     }
 
 
 
-    private void LaunchProjectile()
+    private void LaunchProjectile() // Arc calculation
     {
         // Calculate direction to target
         Vector3 direction = target.position - transform.position;
 
         // Uses gravity to calculate launch velocity
         float gravity = Physics.gravity.magnitude;
-        float heightDifference = target.position.y - transform.position.y;
+        //float heightDifference = target.position.y - transform.position.y;
 
         // Solve for velocity
         float distance = new Vector3(direction.x, 0, direction.z).magnitude;
-        float launchAngle = Mathf.Deg2Rad * 45f;  // Mortar typically launches at 45 degrees
+        float launchAngle = Mathf.Deg2Rad * 45f;  // Launch angle 45 Deg
         float requiredVelocity = Mathf.Sqrt(gravity * distance / Mathf.Sin(2 * launchAngle));
 
         // Set launch angle and speed

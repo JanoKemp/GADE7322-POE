@@ -107,10 +107,7 @@ public class DefenderTower : MonoBehaviour
         if (other.CompareTag("ShotgunProjectile"))
         {
             TakeDamage(other.GetComponent<ShotgunProjectile>().projectileDmg);
-        }
-        if (other.CompareTag("RippleProjectile"))
-        {
-            TakeDamage(other.GetComponent<RippleProjectile>().projectileRippleDmg);
+            
         }
         if (other.CompareTag("tankProjectile"))
         {

@@ -15,6 +15,7 @@ public class EnemyTypeOne : MonoBehaviour
     public GameObject mainTower;
     public GameObject target;
     
+
     //public float[] distanceOfTowers;
 
     private bool canShoot = false;
@@ -33,6 +34,7 @@ public class EnemyTypeOne : MonoBehaviour
         defenders = GameObject.FindGameObjectsWithTag("Defender");
         mainTower = GameObject.FindGameObjectWithTag("PlayerTower");
         StartCoroutine(Shoot());
+        
     }
     private void FixedUpdate()
     {
@@ -132,7 +134,7 @@ public class EnemyTypeOne : MonoBehaviour
         }
     }
 
-    private void Die() { Destroy(gameObject); }
+    private void Die() {Destroy(gameObject); }
 
     // Update is called once per frame
 
@@ -143,7 +145,7 @@ public class EnemyTypeOne : MonoBehaviour
             int projectileDamage = other.GetComponent<DefenderProjectile>().defenderProjectileDmg;
            
             
-            //GetComponent<PlayerRes>().gold += 5;
+            
             TakeDamage(projectileDamage);
             other.GetComponent<DefenderProjectile>().target = null;
         }

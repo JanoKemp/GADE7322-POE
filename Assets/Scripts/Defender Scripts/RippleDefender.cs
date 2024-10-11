@@ -123,11 +123,12 @@ private void OnTriggerEnter(Collider other)
     {
         TakeDamage(other.GetComponent<ShotgunProjectile>().projectileDmg);
     }
-    if(other.CompareTag("RippleProjectile"))
+        if (other.CompareTag("tankProjectile"))
         {
-            TakeDamage(other.GetComponent<RippleProjectile>().projectileRippleDmg);
+            TakeDamage(other.GetComponent<tankProjectile>().tankProjectileDmg);
+            Destroy(other.gameObject);
         }
-}
+    }
 
    
 }

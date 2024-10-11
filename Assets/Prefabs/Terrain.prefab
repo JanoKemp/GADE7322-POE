@@ -123,3 +123,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   uiPrefab: {fileID: 6510421775056224622, guid: a177624d9b5fc324081704b310aa0b68, type: 3}
   objectToSpawn: {fileID: 3208218390758938427, guid: 9fcca84cd16008249816c06e13be91ce, type: 3}
+  Towers:
+  - {fileID: 3208218390758938427, guid: 9fcca84cd16008249816c06e13be91ce, type: 3}
+  - {fileID: 5765530462960998884, guid: 2dc6fac3388b28f4dad47950cc7c43fe, type: 3}
+  - {fileID: 662431560229918269, guid: ddc2b04cd5e91ce41be17af47d0fb49e, type: 3}

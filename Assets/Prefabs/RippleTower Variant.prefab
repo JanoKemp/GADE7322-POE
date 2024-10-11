@@ -487,7 +487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2e0632da708e593489df02631d52b29f, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 2e0632da708e593489df02631d52b29f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -558,11 +558,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   rippleProjectile: {fileID: 8190204784238119602, guid: 1df043987deb72a44b0fc135d6f337b1, type: 3}
-  rpm: 2.2
   health: 0
   maxHealth: 60
   firePoint: {fileID: 5524432423107613399}
   healthBar: {fileID: 0}
+  rotationSpeed: 5
 --- !u!4 &6577674124528419678 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2e0632da708e593489df02631d52b29f, type: 3}

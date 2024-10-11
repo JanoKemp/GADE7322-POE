@@ -24,7 +24,10 @@ public class RippleProjectile : MonoBehaviour
     void Update()
     {
         
-
+        if(currentTarget == null )
+        {
+            Destroy(gameObject);
+        }
 
         Vector3 dir = currentTarget.transform.position - transform.position;//+ new Vector3(0f, 5f, 0f) - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
