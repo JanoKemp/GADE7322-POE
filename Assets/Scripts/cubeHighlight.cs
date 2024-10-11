@@ -43,6 +43,7 @@ public class cubeHighLight : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
+           // Debug.Log("1 is pressed");
             objectToSpawn = Towers[0];
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))

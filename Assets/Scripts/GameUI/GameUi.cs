@@ -9,6 +9,7 @@ public class GameUi : MonoBehaviour
     public TextMeshProUGUI lossTitle;
     public TextMeshProUGUI enemiesKilled;
     public TextMeshProUGUI timeSurvived;
+    public TextMeshProUGUI towerInfo;
 
     private PlayerRes playerRes;
     private MainTower mainTower;
@@ -22,6 +23,7 @@ public class GameUi : MonoBehaviour
         Time.timeScale = 1f;
         playerRes = GameObject.FindGameObjectWithTag("WorldController").GetComponent<PlayerRes>();
         updateGameOverUI = 0;
+        towerInfo.text = "";
         
     }
 
@@ -30,7 +32,24 @@ public class GameUi : MonoBehaviour
     {
         mainTower = GameObject.FindGameObjectWithTag("PlayerTower").GetComponent<MainTower>();
         gameOver = mainTower.gameOver;
-        if(gameOver)
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("Key 1 Pressed");
+            towerInfo.text = "Base Tower: 50 Gold"; // Display for key 1
+        }
+       
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            towerInfo.text = "Ripple Tower: 75 Gold"; // Display for key 2
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            towerInfo.text = "Mortar Tower: 100 Gold"; // Display for key 3
+        }
+
+        if (gameOver)
         {
             
         }
