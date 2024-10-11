@@ -11,7 +11,7 @@ public class MortarProjectile : MonoBehaviour
     private int defenderProjectileDmg = 25;
     private float speed = 10f;
     private float launchForce = 10f;
-    private float explosionRadius = 5f;
+    public float explosionRadius = 5f;
     private float explosionForce = 500f;
     private GameObject[] targetsInVacinity;
 
