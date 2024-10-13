@@ -34,6 +34,6 @@ public class tankProjectile : MonoBehaviour
         float distanceThisFrame = speed * Time.deltaTime;
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        transform.LookAt(target);
+        
     }
 }

@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 public class MainTower : MonoBehaviour
 {
     public float health;
-    public float maxHealth = 100f;
+    public float maxHealth = 500f;
     private HealthBar healthBar;
 
     public Transform target;

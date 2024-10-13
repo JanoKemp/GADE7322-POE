@@ -17,6 +17,7 @@ public class EnemySpawn : MonoBehaviour
     private float goldTrackingTimer;
     public bool allowShotgun = false;
     public bool allowTank = false;
+
     enum Waves // For the first part we use wave 1 only
     {
         wave1, wave2, wave3, wave4
@@ -81,14 +82,37 @@ public class EnemySpawn : MonoBehaviour
 
     void GoldHording()
     {
-        if (gold > 300)
+        if (gold > 300) // If they are hording, spawn more enemies
         {
             goldTrackingTimer += Time.deltaTime;
         }
-        if(goldTrackingTimer >= 50)
+        if(goldTrackingTimer > 10) //Every 10 seconds
         {
-            SpawnEnemies();
+            switch (goldTrackingTimer / 10)//Every 10 Iteration
+            {
+                case 5: SpawnEnemies(); goldTrackingTimer = 0; break;//Reset timer
+
+                case 4: SpawnEnemies();//Spawn 3 extra enemies
+                        SpawnEnemies();
+                        SpawnEnemies();
+                     break;
+
+                case 3: SpawnEnemies();         //Spawn 2 extra enemies
+                        SpawnEnemies(); break;
+
+                case 2: SpawnEnemies(); break;
+
+                case 1:
+                    SpawnEnemies(); //Spawn more enemies
+                        break;
+            }
+            
         }
+        if(gold < 300) //They arent hording gold reset timer
+        {
+            goldTrackingTimer = 0;
+        }
+        
     }
     
 
@@ -96,15 +120,17 @@ public class EnemySpawn : MonoBehaviour
     void Update()
     {
         gold = playerRes.gold;
+        GoldHording();//Tracking players gold
         switch ((int)(Time.timeSinceLevelLoad / 50))
         {
             case 4:  // If more than 200 seconds have passed
                 spawnSpeed = 1f;
-                allowShotgun = false;
-                allowTank = true;
+                
                 break;
             case 3:  // If more than 150 seconds have passed
                 spawnSpeed = 2f;
+                allowShotgun = false;
+                allowTank = true;
                 break;
             case 2:  // If more than 100 seconds have passed
                 spawnSpeed = 3f;

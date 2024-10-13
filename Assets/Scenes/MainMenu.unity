@@ -745,32 +745,33 @@ MonoBehaviour:
   m_text: 'All towers including the main tower have health, if the tower health runs
     out, then they are destroyed. If the main tower is destroyed then the game ends.
 
-    
+
 
     Defender
     towers can only be placed on terrain blocks
 
-    
+
 
     You get 1 gold per second,
     and 5 gold for an enemy kill. Use this gold to spawn towers.
 
-    
 
-    Left
-    mouse button is to select locations for spawning
 
-    Right mouse button deselects
-    the locations
+    Left mouse
+    button is to select locations for spawning, Using 1 , 2 and 3 on the keyboard
+    to choose between different tower types.
 
-    
+    Right mouse button deselects the
+    locations
+
+
 
     A & D rotate the camera around the map
 
-    
 
-    The
-    enemies spawn at a set rate, as time goes on they increase.'
+
+    The enemies spawn
+    at a set rate, as time goes on they increase.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
