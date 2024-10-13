@@ -87,7 +87,7 @@ public class MortarProjectile : MonoBehaviour
                     shotgunEnemy.TakeDamage(defenderProjectileDmg);
                 }
 
-                // Check for TankEnemy script
+                
                 else if (nearbyObject.TryGetComponent<TankEnemy>(out TankEnemy tankEnemy))
                 {
                     tankEnemy.TakeDamage(defenderProjectileDmg);
