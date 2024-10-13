@@ -151,14 +151,14 @@ public class cubeHighLight : MonoBehaviour
         if(towerIndex == 1 && gold >= 75)
         {
             playerGold.MinusGold(75);
-            Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
+            Vector3 spawnPosition = transform.position + new Vector3(0, 0.5f, 0);
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
             DeselectCube();
         }
         if (towerIndex == 2 && gold >= 100)
         {
             playerGold.MinusGold(100);
-            Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
+            Vector3 spawnPosition = transform.position + new Vector3(0, 0.5f, 0);
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
             DeselectCube();
         }
