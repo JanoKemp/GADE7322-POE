@@ -19,6 +19,7 @@ TagManager:
   - RippleProjectile
   - tankProjectile
   - MortarProjectile
+  - upgradeCanvas
   layers:
   - Default
   - TransparentFX

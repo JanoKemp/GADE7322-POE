@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System.Runtime.InteropServices;
 
 public class cubeHighLight : MonoBehaviour
 {
@@ -16,9 +17,12 @@ public class cubeHighLight : MonoBehaviour
 
     public GameObject uiPrefab;
     private GameObject currentUI;
+    
     public GameObject objectToSpawn;
     public GameObject[] Towers;
     private PlayerRes playerGold;
+
+    public bool forMap;
 
     void Start()
     {
@@ -41,19 +45,23 @@ public class cubeHighLight : MonoBehaviour
                 DeselectCube();
             }
         }
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (forMap)
         {
-           // Debug.Log("1 is pressed");
-            objectToSpawn = Towers[0];
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                // Debug.Log("1 is pressed");
+                objectToSpawn = Towers[0];
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                objectToSpawn = Towers[1];
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                objectToSpawn = Towers[2];
+            }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            objectToSpawn = Towers[1];
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            objectToSpawn = Towers[2];
-        }
+        else return;
     }
 
     void OnMouseDown()
@@ -120,10 +128,12 @@ public class cubeHighLight : MonoBehaviour
         }
 
         currentUI.transform.position = transform.position + new Vector3(0, 1.5f, 0);
-
-        Button spawnButton = currentUI.GetComponentInChildren<Button>();
-        spawnButton.onClick.RemoveAllListeners();
-        spawnButton.onClick.AddListener(SpawnObjectOnCube);
+        if (forMap)
+        {
+            Button spawnButton = currentUI.GetComponentInChildren<Button>();
+            spawnButton.onClick.RemoveAllListeners();
+            spawnButton.onClick.AddListener(SpawnObjectOnCube);
+        }
 
         currentUI.SetActive(true);
     }
@@ -144,25 +154,26 @@ public class cubeHighLight : MonoBehaviour
         if (towerIndex == 0 && gold >= 50)
         {
             playerGold.MinusGold(50);
-            Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
+            Vector3 spawnPosition = transform.position + new Vector3(0, 0.8f, 0);
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
             DeselectCube();
         }
         if(towerIndex == 1 && gold >= 75)
         {
             playerGold.MinusGold(75);
-            Vector3 spawnPosition = transform.position + new Vector3(0, 0.5f, 0);
+            Vector3 spawnPosition = transform.position + new Vector3(0, 0.48f, 0);
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
             DeselectCube();
         }
         if (towerIndex == 2 && gold >= 100)
         {
             playerGold.MinusGold(100);
-            Vector3 spawnPosition = transform.position + new Vector3(0, 0.5f, 0);
+            Vector3 spawnPosition = transform.position + new Vector3(0, 0.48f, 0);
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
             DeselectCube();
         }
 
 
     }
+
 }

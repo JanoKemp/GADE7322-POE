@@ -38,6 +38,8 @@ public class DefenderTower : MonoBehaviour
         {
             FindNewTarget();
         }
+        Debug.Log("Rpm: "+rpm + "::: Health: "+health + " / " + maxHealth);
+        
         
     }
     IEnumerator FireTimer()

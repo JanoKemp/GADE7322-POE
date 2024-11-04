@@ -1,11 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UpgradeTowers : MonoBehaviour
 {
-    public GameObject genericBase;
+    
+    public GameObject mainCamera;//Set in inspector
+    public GameObject thisCanvas;// ^^^^^^^^
+    
     private int upgradeMax = 3;
+    private GameObject selectedTower;
+
+    private void Awake()
+    {
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+    }
+    private void Update()
+    {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+        thisCanvas.transform.LookAt(thisCanvas.transform.position + mainCamera.transform.rotation * Vector3.forward, mainCamera.transform.rotation * Vector3.up);
+    }
+
     
     #region Generic Tower Upgrade Functions
     public void UpgradeGenericHealth() // Starting Spawning Tower
