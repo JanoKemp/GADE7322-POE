@@ -15,8 +15,11 @@ public HealthBar healthBar;
 public float rotationSpeed = 5f;
 
 private bool canShoot = true;
-// Start is called before the first frame update
-void Start()
+
+public int upgradeHealthCounter = 0;
+public int upgradeFireRateCounter = 0;
+    // Start is called before the first frame update
+    void Start()
 {
     //fireTimer = 0;
     health = maxHealth;

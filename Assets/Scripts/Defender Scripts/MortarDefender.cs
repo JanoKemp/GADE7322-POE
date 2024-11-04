@@ -16,6 +16,9 @@ public class MortarDefender : MonoBehaviour
     public HealthBar healthBar;
     
     private bool canShoot = true;
+
+    public int upgradeHealthCounter = 0;
+    public int upgradeFireRateCounter = 0;
     // Start is called before the first frame update
     void Start()
     {
