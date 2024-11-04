@@ -69,7 +69,7 @@ public class UpgradeTowers : MonoBehaviour
     public void UpgradeRippleFireRate()
     {
         GameObject rippleTower = transform.root.gameObject;
-        DefenderTower rippleAttrib = rippleTower.GetComponent<DefenderTower>(); //Allows you to change the attributes of the generic yellow Tower
+        RippleDefender rippleAttrib = rippleTower.GetComponent<RippleDefender>(); //Allows you to change the attributes of the generic yellow Tower
         rippleAttrib.upgradeFireRateCounter += 1;
         if (rippleAttrib.upgradeFireRateCounter < upgradeMax)
         {
@@ -82,7 +82,7 @@ public class UpgradeTowers : MonoBehaviour
     public void UpgradeMortarHealth()
     {
         GameObject morterTower = transform.root.gameObject;
-        DefenderTower mortarAttrib = morterTower.GetComponent<DefenderTower>(); //Allows you to change the attributes of the generic yellow Tower
+        MortarDefender mortarAttrib = morterTower.GetComponent<MortarDefender>(); //Allows you to change the attributes of the generic yellow Tower
         mortarAttrib.upgradeHealthCounter += 1;
         //Sets the counters for easier use
         if (mortarAttrib.upgradeHealthCounter < upgradeMax)
@@ -96,7 +96,7 @@ public class UpgradeTowers : MonoBehaviour
     public void UpgradeMortarFireRate()
     {
         GameObject mortarTower = transform.root.gameObject;
-        DefenderTower mortarAttrib = mortarTower.GetComponent<DefenderTower>(); //Allows you to change the attributes of the generic yellow Tower
+        MortarDefender mortarAttrib = mortarTower.GetComponent<MortarDefender>(); //Allows you to change the attributes of the generic yellow Tower
         mortarAttrib.upgradeFireRateCounter += 1;
         if (mortarAttrib.upgradeFireRateCounter < upgradeMax)
         {

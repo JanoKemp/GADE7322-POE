@@ -7,7 +7,7 @@ public class RippleDefender : MonoBehaviour
 { 
 public Transform target;
 public GameObject rippleProjectile;
-private float rpm = 2f;// Default 1.5(shoots slower, does more damage)
+public float rpm = 2f;// Default 1.5(shoots slower, does more damage)
 public float health;
 public float maxHealth = 100;
 public Transform firePoint;
