@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -18,6 +19,15 @@ private bool canShoot = true;
 
 public int upgradeHealthCounter = 0;
 public int upgradeFireRateCounter = 0;
+
+    //Armor System
+
+    public GameObject FireUpgrade1;
+    public GameObject FireUpgrade2;
+    public GameObject FireUpgrade3;
+    public GameObject ArmorUpgrade1;
+    public GameObject ArmorUpgrade2;
+    public GameObject ArmorUpgrade3;
     // Start is called before the first frame update
     void Start()
 {
@@ -51,7 +61,37 @@ void Update()
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             }
         }
+        //Tower Upgrades
+        switch (upgradeHealthCounter) {
+            case 1:
+                ArmorUpgrade1 .SetActive(true);
+                break;
+                case 2:
+                ArmorUpgrade1.SetActive(false);
+                ArmorUpgrade2.SetActive(true);
+                break;
+                case 3: 
+                ArmorUpgrade2 .SetActive(false);
+                ArmorUpgrade3 .SetActive(true);
+                break;
+            default: break;
 
+        }
+        switch(upgradeFireRateCounter)
+        {
+            case 1:
+                FireUpgrade1.SetActive(true);
+                
+                break;
+            case 2:
+                FireUpgrade2.SetActive(true);
+                
+                break;
+            case 3:
+                FireUpgrade3.SetActive(true);
+                break;
+            default: break;
+        }
 
 }
 IEnumerator FireTimer()
@@ -131,7 +171,8 @@ private void OnTriggerEnter(Collider other)
             TakeDamage(other.GetComponent<tankProjectile>().tankProjectileDmg);
             Destroy(other.gameObject);
         }
-    }
+}
 
    
 }
+

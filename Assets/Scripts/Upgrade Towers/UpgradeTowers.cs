@@ -58,6 +58,7 @@ public class UpgradeTowers : MonoBehaviour
     {
         GameObject ripple = transform.root.gameObject;
         RippleDefender rippleS = ripple.GetComponent<RippleDefender>();
+        rippleS.upgradeHealthCounter += 1;
         if (rippleS.upgradeHealthCounter < upgradeMax)
         {
             rippleS.maxHealth += 50;
