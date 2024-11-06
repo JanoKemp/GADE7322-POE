@@ -503,6 +503,7 @@ MonoBehaviour:
   rpm: 1.5
   gameOverUI: {fileID: 0}
   gameOver: 0
+  flash: {fileID: 0}
 --- !u!65 &-4192799087047926505
 BoxCollider:
   m_ObjectHideFlags: 0
