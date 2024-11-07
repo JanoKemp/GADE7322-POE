@@ -17,7 +17,7 @@ public class MainTower : MonoBehaviour
     public GameObject gameOverUI;
 
     public bool gameOver = false;
-    public Flash flash;
+    private ScreenFlashEffect screenFlashEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +28,8 @@ public class MainTower : MonoBehaviour
         healthBar.UpdateHealth(health, maxHealth);
         StartCoroutine(passiveHealth());
         StartCoroutine(FireTimer());
-        flash = FindAnyObjectByType<Flash>();
+        screenFlashEffect = FindObjectOfType<ScreenFlashEffect>();
+        //flash = FindAnyObjectByType<Flash>();
     }
 
     // Update is called once per frame
@@ -109,9 +110,9 @@ public class MainTower : MonoBehaviour
             healthBar.UpdateHealth(health, maxHealth);
 
             // Trigger screen flash
-            if (flash != null)
+            if (screenFlashEffect != null)
             {
-                flash.DamageFlash();
+                screenFlashEffect.TriggerFlash();
             }
         }
 
