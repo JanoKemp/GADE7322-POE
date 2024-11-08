@@ -6,68 +6,80 @@ Shader "Custom/WaterWaves"
         _WaveStrength ("Wave Strength", Float) = 0.1          // Controls wave height
         _WaveFrequency ("Wave Frequency", Float) = 2.0        // Controls wave density
         _WaveSpeed ("Wave Speed", Float) = 1.0                // Controls speed of wave movement
-        _DarkenFactor ("Darken Factor", Float) = 0.5          // Controls how much darker the low areas are
+        _DarkenFactor ("Darken Factor", Float) = 0.5          // Controls darkness in low areas
     }
+
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
-        LOD 200
-
-        CGPROGRAM
-        #pragma surface surf Standard fullforwardshadows vertex:vert
-
-        struct Input
+        Tags { "RenderType"="Opaque" "Queue"="Geometry" }
+        Pass
         {
-            float2 uv_MainTex;
-            float3 worldPos;
-            float waveHeight;  // To pass the displaced height to the surf function
-        };
+            Name "WaterWavesPass"
+            Tags { "LightMode" = "UniversalForward" }
 
-        // User-defined properties
-        float4 _BaseColor;
-        float _WaveStrength;
-        float _WaveFrequency;
-        float _WaveSpeed;
-        float _DarkenFactor;
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
-        // Vertex function to displace vertices
-        void vert (inout appdata_full v, out Input o)
-        {
-            UNITY_INITIALIZE_OUTPUT(Input, o);
+            struct Attributes
+            {
+                float4 positionOS : POSITION;
+                float2 uv : TEXCOORD0;
+            };
 
-            // Apply sine and cosine waves to the x and y axes for horizontal displacement
-            float waveX = sin(v.vertex.x * _WaveFrequency + _Time.y * _WaveSpeed);
-            float waveY = cos(v.vertex.y * _WaveFrequency + _Time.y * _WaveSpeed);
+            struct Varyings
+            {
+                float4 positionHCS : SV_POSITION;
+                float2 uv : TEXCOORD0;
+                float waveHeight : TEXCOORD1; // Pass wave height to fragment shader
+            };
 
-            // Calculate total wave displacement
-            float waveDisplacement = (waveX + waveY) * _WaveStrength;
+            float4 _BaseColor;
+            float _WaveStrength;
+            float _WaveFrequency;
+            float _WaveSpeed;
+            float _DarkenFactor;
 
-            // Displace the vertex along the z-axis (upwards) to create wave height
-            v.vertex.z += waveDisplacement;
+            Varyings vert(Attributes input)
+            {
+                Varyings output;
+                float time = _Time.y * _WaveSpeed;
 
-            // Pass the displaced height to the surf function
-            o.waveHeight = v.vertex.z;
+                // Apply sine and cosine waves for wave displacement
+                float waveX = sin(input.positionOS.x * _WaveFrequency + time);
+                float waveY = cos(input.positionOS.y * _WaveFrequency + time);
+
+                float waveDisplacement = (waveX + waveY) * _WaveStrength;
+
+                // Offset vertex position
+                float3 displacedPosition = input.positionOS.xyz;
+                displacedPosition.z += waveDisplacement;
+
+                // Transform position to clip space
+                output.positionHCS = TransformObjectToHClip(displacedPosition);
+                output.uv = input.uv;
+                output.waveHeight = waveDisplacement;
+
+                return output;
+            }
+
+            half4 frag(Varyings input) : SV_Target
+            {
+                // Map wave height (-_WaveStrength to +_WaveStrength) to [0, 1]
+                float minHeight = -_WaveStrength;
+                float maxHeight = _WaveStrength;
+                float heightFactor = saturate((input.waveHeight - minHeight) / (maxHeight - minHeight));
+
+                // Darken low points
+                float3 darkenedColor = _BaseColor.rgb * _DarkenFactor;
+                float3 finalColor = lerp(darkenedColor, _BaseColor.rgb, heightFactor);
+
+                return half4(finalColor, _BaseColor.a);
+            }
+
+            ENDHLSL
         }
-
-        void surf (Input IN, inout SurfaceOutputStandard o)
-        {
-            // Calculate the darkness factor based on the displaced z position
-            // Assuming the wave height ranges from -_WaveStrength to +_WaveStrength
-            float minHeight = -_WaveStrength;
-            float maxHeight = _WaveStrength;
-
-            // Map the z position to a 0-1 range (0 = lowest point, 1 = highest point)
-            float heightFactor = saturate((IN.waveHeight - minHeight) / (maxHeight - minHeight));
-
-            // Use the heightFactor to blend between the base color and a darkened color
-            float3 darkenedColor = _BaseColor.rgb * _DarkenFactor;  // Darkened base color
-            o.Albedo = lerp(darkenedColor, _BaseColor.rgb, heightFactor);
-
-            // Optional: Adjust metallic and smoothness for a shiny, reflective water surface
-            o.Metallic = 2;
-            o.Smoothness = 2;
-        }
-        ENDCG
     }
-    FallBack "Diffuse"
 }
