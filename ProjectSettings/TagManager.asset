@@ -20,6 +20,7 @@ TagManager:
   - tankProjectile
   - MortarProjectile
   - upgradeCanvas
+  - SecondCamera
   layers:
   - Default
   - TransparentFX
