@@ -22,12 +22,23 @@ public class cubeHighLight : MonoBehaviour
     public GameObject[] Towers;
     private PlayerRes playerGold;
 
+    private static readonly int BaseColorID = Shader.PropertyToID("_BaseColor");
+
     public bool forMap;
 
     void Start()
     {
         cubeRenderer = GetComponent<Renderer>();
-        originalColor = cubeRenderer.material.color;
+        if (cubeRenderer.material.HasProperty(BaseColorID))
+        {
+            originalColor = cubeRenderer.material.GetColor(BaseColorID);
+        }
+        else
+        {
+            Debug.LogWarning("Material does not have a '_BaseColor' property.");
+            originalColor = Color.white; // Fallback to white if not found
+        }
+        //originalColor = cubeRenderer.material.color;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
@@ -104,7 +115,12 @@ public class cubeHighLight : MonoBehaviour
         while (isFlashing)
         {
             t += Time.deltaTime * flashSpeed;
-            cubeRenderer.material.color = Color.Lerp(originalColor, highlightColor, Mathf.PingPong(t, 1));
+            Color currentFlashColor = Color.Lerp(Color.red, highlightColor, Mathf.PingPong(t, 1));
+
+            if (cubeRenderer.material.HasProperty(BaseColorID))
+            {
+                cubeRenderer.material.SetColor(BaseColorID, currentFlashColor);
+            }
             yield return null;
         }
     }
@@ -117,7 +133,10 @@ public class cubeHighLight : MonoBehaviour
 
     public void RevertColor()
     {
-        cubeRenderer.material.color = originalColor;
+        if (cubeRenderer.material.HasProperty(BaseColorID))
+        {
+            cubeRenderer.material.SetColor(BaseColorID, originalColor);
+        }
     }
 
     public void ShowUI()
