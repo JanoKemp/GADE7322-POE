@@ -12,12 +12,25 @@ public class UpgradeTowers : MonoBehaviour
     private int upgradeMax = 3;
     private GameObject selectedTower;
 
+    private PlayerRes playerInformation;
+    private float gold;
+
+    private bool health1 = false;
+    private bool health2 = false;
+    private bool health3 = false;
+    private bool fireRate1 = false;
+    private bool fireRate2 = false;
+    private bool fireRate3 = false;
+        
+
     private void Awake()
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        playerInformation = GameObject.FindGameObjectWithTag("WorldController").GetComponent<PlayerRes>();
     }
     private void Update()
     {
+        gold = playerInformation.gold;
         if (EventSystem.current.IsPointerOverGameObject())
             return;
         thisCanvas.transform.LookAt(thisCanvas.transform.position + mainCamera.transform.rotation * Vector3.forward, mainCamera.transform.rotation * Vector3.up);
@@ -31,9 +44,11 @@ public class UpgradeTowers : MonoBehaviour
         GameObject genericTowerSelected = transform.root.gameObject;
         DefenderTower genericTowerAtt = genericTowerSelected.GetComponent<DefenderTower>(); //Allows you to change the attributes of the generic yellow Tower
         genericTowerAtt.upgradeHealthCounter += 1;
+        
         //Sets the counters for easier use
         if (genericTowerAtt.upgradeHealthCounter < upgradeMax)
         {
+            playerInformation.gold -= 50;
             genericTowerAtt.maxHealth += 50;
             genericTowerAtt.health += 50;
             genericTowerAtt.healthBar.UpdateHealth(genericTowerAtt.health, genericTowerAtt.maxHealth); //Updates the towers UI
@@ -49,6 +64,7 @@ public class UpgradeTowers : MonoBehaviour
         if (genericTowerAtt.upgradeFireRateCounter < upgradeMax)
         {
             genericTowerAtt.rpm -= 0.25f;
+            playerInformation.gold -= 75;
         }
         else return;
     }
@@ -61,6 +77,7 @@ public class UpgradeTowers : MonoBehaviour
         rippleS.upgradeHealthCounter += 1;
         if (rippleS.upgradeHealthCounter < upgradeMax)
         {
+            playerInformation.gold -= 75;
             rippleS.maxHealth += 50;
             rippleS.health += 50;
             rippleS.healthBar.UpdateHealth(rippleS.health, rippleS.maxHealth); //Updates the towers UI
@@ -74,6 +91,7 @@ public class UpgradeTowers : MonoBehaviour
         rippleAttrib.upgradeFireRateCounter += 1;
         if (rippleAttrib.upgradeFireRateCounter < upgradeMax)
         {
+            playerInformation.gold -= 80;
             rippleAttrib.rpm -= 0.33f;
         }
         else return;
@@ -88,6 +106,7 @@ public class UpgradeTowers : MonoBehaviour
         //Sets the counters for easier use
         if (mortarAttrib.upgradeHealthCounter < upgradeMax)
         {
+            playerInformation.gold -= 80;
             mortarAttrib.maxHealth += 50;
             mortarAttrib.health += 50;
             mortarAttrib.healthBar.UpdateHealth(mortarAttrib.health, mortarAttrib.maxHealth); //Updates the towers UI
@@ -101,6 +120,7 @@ public class UpgradeTowers : MonoBehaviour
         mortarAttrib.upgradeFireRateCounter += 1;
         if (mortarAttrib.upgradeFireRateCounter < upgradeMax)
         {
+            playerInformation.gold -= 500;
             mortarAttrib.rpm -= 2f;
         }
         else return;

@@ -139,8 +139,11 @@ public class EnemySpawn : MonoBehaviour
             case 1:  // If more than 50 seconds have passed
                 spawnSpeed = 4f;
                 break;
-            default: // Less than 50 seconds
+            case 0:
                 spawnSpeed = 5f;
+                break;
+            default: // Less than 50 seconds
+                spawnSpeed = 0.5f;
                 break;
         }
         Debug.Log(spawnSpeed); 
