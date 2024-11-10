@@ -4,9 +4,9 @@ Shader "Custom/GrassBlowing"
     {
         _BaseColor ("Base Color", Color) = (0.2, 0.8, 0.2, 1)  // Light green color
         _WaveColor ("Wave Color", Color) = (0.0, 0.5, 0.0, 1)  // Darker green wave color
-        _WaveSpeed ("Wave Speed", Float) = 1.0                 // Speed of wave
-        _WaveFrequency ("Wave Frequency", Float) = 5.0         // Frequency of wave
-        _WaveAmplitude ("Wave Amplitude", Float) = 0.5         // Amplitude of wave
+        _WaveSpeed ("Wave Speed", Float) = 1.0                 
+        _WaveFrequency ("Wave Frequency", Float) = 5.0         
+        _WaveAmplitude ("Wave Amplitude", Float) = 0.5         
     }
 
     SubShader
@@ -50,7 +50,7 @@ Shader "Custom/GrassBlowing"
                 // Calculate wave pattern based on world position and time
                 float wave = sin((input.worldPos.x + _Time.y * _WaveSpeed) * _WaveFrequency) * _WaveAmplitude;
 
-                // Pass the wave value for blending in the fragment shader
+                
                 output.waveFactor = wave;
 
                 // Transform the vertex position to clip space
@@ -62,7 +62,7 @@ Shader "Custom/GrassBlowing"
 
             half4 frag(Varyings input) : SV_Target
             {
-                // Interpolate between base color and wave color based on wave factor
+                
                 float3 blendedColor = lerp(_BaseColor.rgb, _WaveColor.rgb, input.waveFactor);
 
                 return half4(blendedColor, _BaseColor.a);

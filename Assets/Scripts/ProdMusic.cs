@@ -23,7 +23,7 @@ public class ProdMusic : MonoBehaviour
     private GameObject[] Enemies; 
     private int enemiesCount;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         // Get player information for gold tracking
@@ -72,7 +72,7 @@ public class ProdMusic : MonoBehaviour
     {
         if (playlist.Length == 0) return;
 
-        // Select a random clip that is different from the last clip
+        
         int randomIndex = Random.Range(0, playlist.Length);
         currentClip = playlist[randomIndex];
 

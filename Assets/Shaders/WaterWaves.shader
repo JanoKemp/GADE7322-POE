@@ -2,10 +2,10 @@ Shader "Custom/WaterWaves"
 {
      Properties
     {
-        _BaseColor ("Base Color", Color) = (0.0, 0.5, 0.7, 1) // Blue-green water color
+        _BaseColor ("Base Color", Color) = (0.0, 0.5, 0.7, 1) // Water Color
         _WaveStrength ("Wave Strength", Float) = 0.1          // Controls wave height
-        _WaveFrequency ("Wave Frequency", Float) = 2.0        // Controls wave density
-        _WaveSpeed ("Wave Speed", Float) = 1.0                // Controls speed of wave movement
+        _WaveFrequency ("Wave Frequency", Float) = 2.0        
+        _WaveSpeed ("Wave Speed", Float) = 1.0                
         _DarkenFactor ("Darken Factor", Float) = 0.5          // Controls darkness in low areas
     }
 
@@ -33,7 +33,7 @@ Shader "Custom/WaterWaves"
             {
                 float4 positionHCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
-                float waveHeight : TEXCOORD1; // Pass wave height to fragment shader
+                float waveHeight : TEXCOORD1; // Pass to fragment
             };
 
             float4 _BaseColor;
@@ -47,7 +47,7 @@ Shader "Custom/WaterWaves"
                 Varyings output;
                 float time = _Time.y * _WaveSpeed;
 
-                // Apply sine and cosine waves for wave displacement
+                // Use Cosine and sine for wave displacement
                 float waveX = sin(input.positionOS.x * _WaveFrequency + time);
                 float waveY = cos(input.positionOS.y * _WaveFrequency + time);
 
@@ -67,7 +67,7 @@ Shader "Custom/WaterWaves"
 
             half4 frag(Varyings input) : SV_Target
             {
-                // Map wave height (-_WaveStrength to +_WaveStrength) to [0, 1]
+                
                 float minHeight = -_WaveStrength;
                 float maxHeight = _WaveStrength;
                 float heightFactor = saturate((input.waveHeight - minHeight) / (maxHeight - minHeight));
