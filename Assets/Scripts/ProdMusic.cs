@@ -21,7 +21,11 @@ public class ProdMusic : MonoBehaviour
 
     //Fetching number of enemies in scene
     private GameObject[] Enemies; 
-    private int enemiesCount;
+    public int enemiesCount;
+
+    public bool Action = false;
+    public bool Ambient = false;
+    public bool Intermediate = false;
 
     
     void Start()
@@ -51,7 +55,7 @@ public class ProdMusic : MonoBehaviour
     private void CheckPlayerGold()
     {
         
-        if (enemiesCount > 20 || gold > 300)
+        if (enemiesCount > 20 && gold > 300)
         {
             if (!IsCurrentPlaylist(listAction))
                 PlayRandomClip(listAction);
@@ -61,7 +65,7 @@ public class ProdMusic : MonoBehaviour
             if (!IsCurrentPlaylist(listOther))
                 PlayRandomClip(listOther);
         }
-        else
+        else if ( enemiesCount < 7)
         {
             if (!IsCurrentPlaylist(listAmbient))
                 PlayRandomClip(listAmbient);
@@ -71,7 +75,24 @@ public class ProdMusic : MonoBehaviour
     private void PlayRandomClip(AudioClip[] playlist)
     {
         if (playlist.Length == 0) return;
-
+        if(playlist == listAction)
+        {
+            Action = true;
+            Ambient = false;
+            Intermediate = false;
+        }
+        else if(playlist == listOther)
+        {
+            Action = false;
+            Ambient = false ;
+            Intermediate = true;
+        }
+        else
+        {
+            Ambient=true;
+            Action = false;
+            Intermediate=false;
+        }
         
         int randomIndex = Random.Range(0, playlist.Length);
         currentClip = playlist[randomIndex];
