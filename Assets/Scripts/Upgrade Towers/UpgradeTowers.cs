@@ -21,6 +21,11 @@ public class UpgradeTowers : MonoBehaviour
     private bool fireRate1 = false;
     private bool fireRate2 = false;
     private bool fireRate3 = false;
+
+    public float fireGoldCost = 0;
+    public float healthGoldCost = 0;
+
+   
         
 
     private void Awake()
@@ -39,91 +44,108 @@ public class UpgradeTowers : MonoBehaviour
     
     #region Generic Tower Upgrade Functions
     public void UpgradeGenericHealth() // Starting Spawning Tower
-    { 
-        
-        GameObject genericTowerSelected = transform.root.gameObject;
-        DefenderTower genericTowerAtt = genericTowerSelected.GetComponent<DefenderTower>(); //Allows you to change the attributes of the generic yellow Tower
-        genericTowerAtt.upgradeHealthCounter += 1;
-        
-        //Sets the counters for easier use
-        if (genericTowerAtt.upgradeHealthCounter < upgradeMax)
+    {
+        if (playerInformation.gold - 50 > 0)
         {
-            playerInformation.gold -= 50;
-            genericTowerAtt.maxHealth += 50;
-            genericTowerAtt.health += 50;
-            genericTowerAtt.healthBar.UpdateHealth(genericTowerAtt.health, genericTowerAtt.maxHealth); //Updates the towers UI
+            GameObject genericTowerSelected = transform.root.gameObject;
+            DefenderTower genericTowerAtt = genericTowerSelected.GetComponent<DefenderTower>(); //Allows you to change the attributes of the generic yellow Tower
+            genericTowerAtt.upgradeHealthCounter += 1;
+
+            //Sets the counters for easier use
+            if (genericTowerAtt.upgradeHealthCounter < upgradeMax)
+            {
+                playerInformation.gold -= 50;
+                genericTowerAtt.maxHealth += 50;
+                genericTowerAtt.health += 50;
+                genericTowerAtt.healthBar.UpdateHealth(genericTowerAtt.health, genericTowerAtt.maxHealth); //Updates the towers UI
+            }
+            else return;
         }
-        else return;
         
     }
     public void UpgradeGenericFireRate()
     {
-        GameObject genericTowerSelected = transform.root.gameObject;
-        DefenderTower genericTowerAtt = genericTowerSelected.GetComponent<DefenderTower>(); //Allows you to change the attributes of the generic yellow Tower
-        genericTowerAtt.upgradeFireRateCounter += 1;
-        if (genericTowerAtt.upgradeFireRateCounter < upgradeMax)
+        if (playerInformation.gold - 75 > 0)
         {
-            genericTowerAtt.rpm -= 0.25f;
-            playerInformation.gold -= 75;
+            GameObject genericTowerSelected = transform.root.gameObject;
+            DefenderTower genericTowerAtt = genericTowerSelected.GetComponent<DefenderTower>(); //Allows you to change the attributes of the generic yellow Tower
+            genericTowerAtt.upgradeFireRateCounter += 1;
+            if (genericTowerAtt.upgradeFireRateCounter < upgradeMax)
+            {
+                genericTowerAtt.rpm -= 0.25f;
+                playerInformation.gold -= 75;
+            }
+            else return;
         }
-        else return;
     }
     #endregion
     #region Ripple Tower Upgrades
     public void UpgradeRippleHealth()
     {
-        GameObject ripple = transform.root.gameObject;
-        RippleDefender rippleS = ripple.GetComponent<RippleDefender>();
-        rippleS.upgradeHealthCounter += 1;
-        if (rippleS.upgradeHealthCounter < upgradeMax)
+        if (playerInformation.gold - 75 > 0)
         {
-            playerInformation.gold -= 75;
-            rippleS.maxHealth += 50;
-            rippleS.health += 50;
-            rippleS.healthBar.UpdateHealth(rippleS.health, rippleS.maxHealth); //Updates the towers UI
+            GameObject ripple = transform.root.gameObject;
+            RippleDefender rippleS = ripple.GetComponent<RippleDefender>();
+            rippleS.upgradeHealthCounter += 1;
+            if (rippleS.upgradeHealthCounter < upgradeMax)
+            {
+                playerInformation.gold -= 75;
+                rippleS.maxHealth += 50;
+                rippleS.health += 50;
+                rippleS.healthBar.UpdateHealth(rippleS.health, rippleS.maxHealth); //Updates the towers UI
+            }
+            else return;
         }
-        else return;
     }
     public void UpgradeRippleFireRate()
     {
-        GameObject rippleTower = transform.root.gameObject;
-        RippleDefender rippleAttrib = rippleTower.GetComponent<RippleDefender>(); //Allows you to change the attributes of the generic yellow Tower
-        rippleAttrib.upgradeFireRateCounter += 1;
-        if (rippleAttrib.upgradeFireRateCounter < upgradeMax)
+        if (playerInformation.gold - 80 > 0)
         {
-            playerInformation.gold -= 80;
-            rippleAttrib.rpm -= 0.33f;
+            GameObject rippleTower = transform.root.gameObject;
+            RippleDefender rippleAttrib = rippleTower.GetComponent<RippleDefender>(); //Allows you to change the attributes of the generic yellow Tower
+            rippleAttrib.upgradeFireRateCounter += 1;
+            if (rippleAttrib.upgradeFireRateCounter < upgradeMax)
+            {
+                playerInformation.gold -= 80;
+                rippleAttrib.rpm -= 0.33f;
+            }
+            else return;
         }
-        else return;
     }
     #endregion
     #region Mortar Defender Upgrade
     public void UpgradeMortarHealth()
     {
-        GameObject morterTower = transform.root.gameObject;
-        MortarDefender mortarAttrib = morterTower.GetComponent<MortarDefender>(); //Allows you to change the attributes of the generic yellow Tower
-        mortarAttrib.upgradeHealthCounter += 1;
-        //Sets the counters for easier use
-        if (mortarAttrib.upgradeHealthCounter < upgradeMax)
+        if (playerInformation.gold - 80 > 0)
         {
-            playerInformation.gold -= 80;
-            mortarAttrib.maxHealth += 50;
-            mortarAttrib.health += 50;
-            mortarAttrib.healthBar.UpdateHealth(mortarAttrib.health, mortarAttrib.maxHealth); //Updates the towers UI
+            GameObject morterTower = transform.root.gameObject;
+            MortarDefender mortarAttrib = morterTower.GetComponent<MortarDefender>(); //Allows you to change the attributes of the generic yellow Tower
+            mortarAttrib.upgradeHealthCounter += 1;
+            //Sets the counters for easier use
+            if (mortarAttrib.upgradeHealthCounter < upgradeMax)
+            {
+                playerInformation.gold -= 80;
+                mortarAttrib.maxHealth += 50;
+                mortarAttrib.health += 50;
+                mortarAttrib.healthBar.UpdateHealth(mortarAttrib.health, mortarAttrib.maxHealth); //Updates the towers UI
+            }
+            else return;
         }
-        else return;
     }
     public void UpgradeMortarFireRate()
     {
-        GameObject mortarTower = transform.root.gameObject;
-        MortarDefender mortarAttrib = mortarTower.GetComponent<MortarDefender>(); //Allows you to change the attributes of the generic yellow Tower
-        mortarAttrib.upgradeFireRateCounter += 1;
-        if (mortarAttrib.upgradeFireRateCounter < upgradeMax)
+        if (playerInformation.gold - 500 > 0)
         {
-            playerInformation.gold -= 500;
-            mortarAttrib.rpm -= 2f;
+            GameObject mortarTower = transform.root.gameObject;
+            MortarDefender mortarAttrib = mortarTower.GetComponent<MortarDefender>(); //Allows you to change the attributes of the generic yellow Tower
+            mortarAttrib.upgradeFireRateCounter += 1;
+            if (mortarAttrib.upgradeFireRateCounter < upgradeMax)
+            {
+                playerInformation.gold -= 500;
+                mortarAttrib.rpm -= 2f;
+            }
+            else return;
         }
-        else return;
     }
     #endregion
 }

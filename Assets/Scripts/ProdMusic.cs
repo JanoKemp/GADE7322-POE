@@ -51,12 +51,12 @@ public class ProdMusic : MonoBehaviour
     private void CheckPlayerGold()
     {
         
-        if (enemiesCount > 1 || gold > 300)
+        if (enemiesCount > 20 || gold > 300)
         {
             if (!IsCurrentPlaylist(listAction))
                 PlayRandomClip(listAction);
         }
-        else if ( enemiesCount > 5 && gold > 200 )
+        else if ( enemiesCount > 10 && gold > 200 )
         {
             if (!IsCurrentPlaylist(listOther))
                 PlayRandomClip(listOther);

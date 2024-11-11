@@ -9,7 +9,7 @@ public class RippleProjectile : MonoBehaviour
     // Start is called before the first frame update
     public GameObject[] Targets;
     public GameObject currentTarget;
-    public int projectileRippleDmg = 7;
+    public int projectileRippleDmg = 10;
     public Rigidbody rb;
     private int hitCounter = 0;
     private float speed = 20f;
